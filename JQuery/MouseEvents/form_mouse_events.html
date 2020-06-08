@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Mouse Events</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="jquery-3.5.1.js"></script>
+</head>
+<body>
+<hr>
+<form action="#" method="#">
+    <fieldset>
+        <legend>Vehicle customization</legend>
+        <div class="form-field">
+            <div>Packages:</div>
+
+            <input type="radio" name="trim" id="plain" value="plain">
+            <label for="plain">Plain</label>
+
+
+            <input type="radio" name="trim" id="deluxe" value="deluxe">
+            <label for="deluxe">Deluxe</label>
+
+
+            <input type="radio" name="trim" id="custom" value="custom">
+            <label for="custom">Custom</label>
+        </div>
+
+
+        <div class="form-field">
+            <div>Extra Options: </div>
+
+            <input type="checkbox" name="option" id="fogLights" value="fogLights">
+            <label for="fogLights">Fog Lights</label>
+
+            <input type="checkbox" name="option" id="leather" value="leather">
+            <label for="leather">Leather</label>
+
+            <input type="checkbox" name="option" id="dvd" value="dvd">
+            <label for="dvd">DVD</label>
+
+        </div>
+
+        <div class="form-field">
+            <input type="submit" id="submit" value="Submit Form">
+        </div>
+    </fieldset>
+</form>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("input[name='trim']").click(function(event)
+            {
+                if($(this).val() == "deluxe")
+                {
+                    $("input[name='option']").prop("checked", true);
+                }
+                else if($(this).val() == "plain")
+                {
+                    $("input[name='option']").prop("checked",false);
+                }
+            });
+
+             $("input[name=['option']").click(function(event)
+             {
+                    $("#custom").prop("checked", "checked");
+             });
+         });
+
+
+
+    </script>
+
+
+</body>
+</html>
+
