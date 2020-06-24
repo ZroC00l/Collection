@@ -26,7 +26,8 @@ body{
     position:absolute;
     left: 0px;
     top:200px;
-    width: 500px;
+    height:auto;
+    width: 1000px;
     background-color:silver;
 }
 /*This adds a border around the container*/
@@ -44,10 +45,16 @@ body{
 
 .heavy_weight_container ul {
 
-    vertical-align:middle;
+    vertical-align:text-top;
     margin:auto;
-    position:absolute;
     right:0px;
+    position:relative;
+
+}
+
+.heavy_weight_container p {
+   vertical-align: text-bottom;
+   position: relative;
 
 }
 
