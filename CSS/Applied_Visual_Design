@@ -10,3 +10,4 @@ using the text-align property and its attributes which are:
 	3.Left- aligns text to the left
 	4.Right-aligns text to the right
 
+We can set an element's width by using the width property, and we can give the width value as a relative length unit using rem and em length units or give the width an absolute length by usin gthe px and percentage units of length
