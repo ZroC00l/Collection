@@ -11,3 +11,15 @@ using the text-align property and its attributes which are:
 	4.Right-aligns text to the right
 
 We can set an element's width by using the width property, and we can give the width value as a relative length unit using rem and em length units or give the width an absolute length by usin gthe px and percentage units of length
+
+We can set the height an of element by using CSS's height property.
+To make a certain text bold in HTML we wrap that text with the strong tag as is:
+
+	<p> Hello <strong>World</strong>, I write Code</p> 
+
+wrapping the text "World" with the strong tags will result in the text shown in bold.There CSS alternative to making a text bold is to use CSS property called font-weight with bold as its value as in:
+	 "font-weight: bold;"
+To underline text in HTML we show that specific text is important, this is not to be cofused for a link.
+We use the "u" tag to achieve is ability , however in CSS we use the "text-decoration" property and give it a value of "underline" as in : 
+
+	text-decoration: underline;
