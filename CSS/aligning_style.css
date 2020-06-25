@@ -5,6 +5,7 @@ h4{
     /*height: 25px;*/
     padding: 10px;
     background-color: rgba(45,45,45,0.1);
+    font-size: 27px;
 
 }
 
@@ -26,4 +27,9 @@ p{
 
 .cardContent{
     padding: 10px;
+}
+/* This adds a box-shadow property to the card like element*/
+#thumbnail {
+
+    box-shadow: 0 10px 15px rgba(0,0,0,0.55), 0 6px 6px rgba(0,0,0,0.23);
 }

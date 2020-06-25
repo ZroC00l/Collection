@@ -37,3 +37,25 @@ You can use the <hr> tag to add a horizontal line across the width of its contai
 
 We can add a background color to a text to emphasize it instead of changing the actual color of the text, think of it as if you are highlighting the text , to achieve this ability we merely give the text a background-color property and use the "rgba" color system
 the rgba color system is different from the normal rgb and hex code color system in that it has the aplha value which allows us to control the opacity of the color, the alpha value can take a value between 0 and 1 with 0 reprenting clearity or transparency and 1 representing a solid color.
+
+HTML provides us with 6 header tags(h1 through h6) each differing in size with h1 being the biggest and h6 being the smallest. We can manipulate the sizes of each of these tags using the CSS property called "font-size" and with units of abosolute length(px or %) and relative length(rem and em).
+
+ADDING BOX-SHADOW PROPERTY TO A CARD LIKE ELEMENT
+
+The box-shadow property applies one or more shadows to an element.
+
+The box-shadow property takes values for
+
+offset-x (how far to push the shadow horizontally from the element),
+offset-y (how far to push the shadow vertically from the element),
+blur-radius,
+spread-radius and
+color, in that order.
+The blur-radius and spread-radius values are optional.
+
+Multiple box-shadows can be created by using commas to separate properties of each box-shadow element.
+
+Here's an example of the CSS to create multiple shadows with some blur, at mostly-transparent black colors:
+
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px 6px rgba(0,0,0,0.23);
+
