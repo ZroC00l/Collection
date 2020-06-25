@@ -59,3 +59,4 @@ Here's an example of the CSS to create multiple shadows with some blur, at mostl
 
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px 6px rgba(0,0,0,0.23);
 
+CSS provides us with the opacity property which we can  use to adjust the opacity or rather the transparency of the text,the opacity property takes a value between 0 and 1 , with 0 symbolizing complete transparency and 0.5 half transparency and 1 complete solid color meaning no transparent.
