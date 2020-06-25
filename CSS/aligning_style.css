@@ -2,7 +2,9 @@
 	provided by CSS*/
 h4{
     text-align: center;
-    height: 25px;
+    /*height: 25px;*/
+    padding: 10px;
+    background-color: rgba(45,45,45,0.1);
 
 }
 

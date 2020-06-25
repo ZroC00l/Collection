@@ -34,3 +34,6 @@ To Show that piece of text is no longer valid we use the strikethrough tag to sh
 	text-decoration: line-through;
 
 You can use the <hr> tag to add a horizontal line across the width of its containing element. This can be used to define a change in topic or to visually separate groups of content. hr is a self enclosing tag meaning it has no closing tag.
+
+We can add a background color to a text to emphasize it instead of changing the actual color of the text, think of it as if you are highlighting the text , to achieve this ability we merely give the text a background-color property and use the "rgba" color system
+the rgba color system is different from the normal rgb and hex code color system in that it has the aplha value which allows us to control the opacity of the color, the alpha value can take a value between 0 and 1 with 0 reprenting clearity or transparency and 1 representing a solid color.
