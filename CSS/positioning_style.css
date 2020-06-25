@@ -1,0 +1,35 @@
+/* This document shows the positioning property and its offsets used to style the layout
+	of html elements as well as override the normal flow of the document*/
+
+body{
+    min-height: 150vh;
+
+}
+
+#navbar{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background-color:rgb(0,0,0);
+}
+
+nav ul{
+    margin:0px;
+    padding: 5px 0px 5px 30px;
+}
+
+nav li{
+    display: inline;
+    margin-right: 20px;
+
+}
+
+a{
+    text-decoration:none;
+    color:#FFF;
+}
+
+a:hover{
+    color:rgb(0,255,0);
+}
