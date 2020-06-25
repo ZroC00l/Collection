@@ -33,3 +33,18 @@ a{
 a:hover{
     color:rgb(0,255,0);
 }
+
+#left{
+    float:left;
+    width:50%;
+}
+
+#right{
+    float:right;
+    width:40%;
+}
+
+aside,section{
+    padding: 2px;
+    background-color: #ccc;
+}
