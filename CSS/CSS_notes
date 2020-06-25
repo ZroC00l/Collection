@@ -1,0 +1,208 @@
+ADJUST THE PADDING OF AN ELEMENT
+
+Until this point Ive realized that each html element is simply a small rectangular shape
+There are 3 properties that are responsible for controling space surrounding each html element, these properties are:
+	1.Margin
+	2.Padding
+	3.Border
+Padding is the amount of space between the html element's content and its border
+
+ADJUST THE MARGIN OF AN ELEMENT
+ Margin is the amount of space between an html element's border an dthe surrounding html elements
+ We can set the margin value of an element to a negative number this however will increase the size of the html 
+ element
+
+ADDING A DIFFERENT PADDING TO EACH SIDE OF AN ELEMENT
+Sometimes we want to give an element different padding sizes on each of its sides, we do so by editing the
+4 padding properties, which are:
+	1.padding-top
+	2.padding-left
+	3.padding-bottom
+	4.padding-right
+
+ADDING DIFFERENT MARGINS TO AN ELEMENT
+Like padding sometimes we want to set different margins of an element to each side,
+CSS allows us to edit all 4 sides of the element using 4 margin properties,namely:
+	1.margin-top
+	2.margin-left
+	3.margin-bottom
+	4.margin-right
+
+USING CLOCKWISE NOTATION TO SET PADDINF AND MARGIN OF AN ELEMENT
+we can use a shorhand notation to set the padding of an element using just one line, instead
+of setting them individually , this notation uses a clock notation format as in top,right,bottom and left
+so setting a padding using clock notation will look as follows:
+	
+	 padding: 40px 20px 20px 40px;
+
+The same notation can also be applied to marginS:
+	
+	margin: 40px 20px 20px 40px;
+
+USING ATTRIBUTE SELECTORS TO STYLE AN ELEMENT
+Up until now have been using the class and ID selectors whenever we want to style an element, however
+CSS provides us with other selectors that we can use to select custom groups of elements to style( such as checkboxes and radio buttons) 
+we use the notation [attr='value'] to select a custon group of element we wish to style for instance say we want to style the margins the checkboxes element we would do it as follows:
+		
+		[type='checkbox']{
+
+			margin: 10px 0px 0px 15px;
+		}  
+
+UNDERSTANDING ABSOULTE VERSUS RELATIVE UNITS OF MEASUREMENT
+There are 2 main types of length units and these are , Absolute and Relative units of length
+Absolute unit of length is tied to the physical units of length , this means they approximate the actual length
+measurements on the screen, however this varies depending on the screen resolution.
+Relative unit of length are relative to another length value, they usually use 'em' or 'rem'
+for instance em unit is based off the size of an element's font
+
+STYLING THE BACKGROUND AND WORKING WITH CSS INHERITANCE
+Note each html page has a body and styling the body of that page will allow other html elements such as text to inherit
+the styling properties of the body element for instance setting the color property for the body element will affect the text
+inside the body causing it to have the same color , so to override this property you will have to create a class for the text color
+so that it overrides the color property set in the body element style.
+
+CLASS STYLING HIERARCHY
+when styling an element using classes its important to note that the order in which the classes appear 
+in the CSS styling document matter, for instance say we have the following piece of code
+
+	<h1 class="pink-text blue-text">
+
+	<style>
+		.pink-text{
+			color:pink;
+		}
+
+		.blue-text{
+			color:blue;
+		}
+
+	</style>
+since both these styles are applied to a sinlge element h1, one will have to be chosen since we cant have both
+color properties set on a single element, so the order declaration is taken into account, since the .blue-text class 
+is declared second it will have higher precedence than the .pink-text class , meaning the color of h1 element will be blue.
+
+OVERRIDING CLASS DECLARATION WITH ID DECLARATION
+so far we have worked with overriding body element styling with the use of class declarations, however we can also
+override class declarations with the help of ID declartion say for instance we have the followinf piece of code:
+
+	<h1 class="pink-text blue-text">
+
+	<style>
+		.pink-text{
+			color:pink;
+		}
+
+		.blue-text{
+			color:blue;
+		}
+
+	</style>
+
+And we want to style the h1 element to have a color of orange , we would need to override the class declaration by giving the h1 element
+an ID and declaring the id properties in css as in:
+
+	<h1 id="orange-text" class="pink-text blue-text">
+
+	<style>
+		.pink-text{
+			color:pink;
+		}
+
+		.blue-text{
+			color:blue;
+		}
+
+		.orange-text{
+			color:orange;
+		}
+
+	</style>
+
+OVERRIDE CLASS DECLARATION WITH INLINE STYLING
+although not usually used in real coding standards we can override css classs declarations using 
+CSS inline styling as follows:
+
+	<h1 class="pink-text blue-text" style="color:white">
+
+		<style>
+			.pink-text{
+				color:pink;
+			}
+
+			.blue-text{
+				color:blue;
+			}
+
+		</style>
+What happens here is that both CSS class declartions will be overriden by the inline style used inside
+h1 element, thus giving the element a color of white.
+
+OVERRIDING ALL CSS STYLES USING IMPORTANT
+before we get into the use of important to override other css styling properties, one should know why 
+we need to override CSS. In many instances you will be using css libraries for stlying and these may override your own 
+CSS styling you've set to an element so in order to prevent that from happening we use " !important " property  when you absolutely need to be sure that an element has specific CSS.
+given the code:
+
+	<h1 id="orange-text" class="pink-text blue-text">
+
+		<style>
+			.pink-text{
+				color:pink !important;
+			}
+
+			.blue-text{
+				color:blue;
+			}
+
+			.orange-text{
+				color:orange;
+			}
+
+		</style>
+By adding the " !important " property to the .pint-text class declaration we are overridng any other style set to 
+the h1 element making sure we have the .pink-text property style.
+
+COLOR SYSTEM IN CSS
+CSS provides us with extensive colors we can use to style elements, these colors are accessed through the use of the
+hex code system (RGB) where each letter is represented by two hex digits for instance black= #000000 and red=#FF0000
+blue= #0000FF green=#00FF00 using this hex code color system we can create over 16 million color varieties to style elements
+however we can use the hex code shorthand notation which limits this range of colors to around 4000 , the shorthand notation
+uses 3 hex digits to represnt each color e.g red=#F00 blue=#00F green=#0F0 and black=#000
+
+We can also inlist the help of the rgb color system if one feels that hex code color system is a bit difficult to comprehend
+the rgb color system uses numbers between 0 and 255 to represent around the same number of colors as in the hex code color system
+e.g green=rgb(0,255,0) blue=rgb(0,0,255) red=rgb(255,0,0)........255 represents the brightest color while 0 represents no color.
+
+CSS VARIABLES
+css variables provide us with the ability to change many css style properties by simply chnaging a single value
+to declare a css variable we using the following notation:
+	
+		--variable-name: property-value;
+
+e.g.
+		<style>
+			.penguin{
+
+				--penguin-skin:gray;
+
+			}
+
+			body{
+				background: var(--penguin-skin, black); /*black is the fallout value This will set background to black if your variable wasn't set. */
+			}
+
+		</style>
+After you create your variable, you can assign its value to other CSS properties by referencing the name you gave it.
+This will change the background of whatever element you are targeting to gray because that is the value of the --penguin-skin variable.
+When using your variable as a CSS property value, you can attach a fallback value that your browser will revert to if the given variable is invalid.
+
+INHERIT CSS VARIABLES
+When you create a variable, it is available for you to use inside the selector in which you create it. It also is available in any of that selector's descendants. This happens because CSS variables are inherited, just like ordinary properties.
+
+To make use of inheritance, CSS variables are often defined in the :root element.
+
+:root is a pseudo-class selector that matches the root element of the document, usually the html element. By creating your variables in :root, they will be available globally and can be accessed from any other selector in the style sheet.
+
+
+APLLIED VISUAL DESIGN

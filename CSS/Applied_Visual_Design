@@ -1,0 +1,12 @@
+INTRODUCTION TO APPLIED VISUAL DESIGN 
+HTML is responsible for the structure and semantics of a page's content while CSS is in charge of the layout and appearance
+This section covers the basic tools developers use to create their own visual design
+
+Text is a huge part of a page's content, thus CSS provides us with several options for how to align text
+using the text-align property and its attributes which are:
+	
+	1.Justify- this will cause all the lines of the text except for the last line to meet the left and right edges of the box line.
+	2.Center- this centers the text
+	3.Left- aligns text to the left
+	4.Right-aligns text to the right
+
