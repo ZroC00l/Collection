@@ -23,3 +23,14 @@ To underline text in HTML we show that specific text is important, this is not t
 We use the "u" tag to achieve is ability , however in CSS we use the "text-decoration" property and give it a value of "underline" as in : 
 
 	text-decoration: underline;
+
+To emphasize a peice of text we use the em tag, this will show the text wrapped within the em tags in italics
+In CSS to show a text in italics we use the "font-style" property with the value "italic" to achive this ability:
+	
+	font-style: italic;
+
+To Show that piece of text is no longer valid we use the strikethrough tag to show this, in HTML we simply wrap the text around the <s> tag and in CSS we use the text-decoration property with the value "line-through"  as in:
+	
+	text-decoration: line-through;
+
+You can use the <hr> tag to add a horizontal line across the width of its containing element. This can be used to define a change in topic or to visually separate groups of content. hr is a self enclosing tag meaning it has no closing tag.
