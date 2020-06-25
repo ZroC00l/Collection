@@ -60,3 +60,31 @@ Here's an example of the CSS to create multiple shadows with some blur, at mostl
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px 6px rgba(0,0,0,0.23);
 
 CSS provides us with the opacity property which we can  use to adjust the opacity or rather the transparency of the text,the opacity property takes a value between 0 and 1 , with 0 symbolizing complete transparency and 0.5 half transparency and 1 complete solid color meaning no transparent.
+
+CSS provides us with a nifty property called text-transform which can be used to change the appearance of text without having to manually change the text yourself. Text-transfrom can be used to manipulate the appearance of the webpage text so that is appears consistently throughout the webpage. It has the following property values :
+	
+		Value	Result
+	lowercase	"transform me"
+	uppercase	"TRANSFORM ME"
+	capitalize	"Transform Me"
+	initial	Use the default value
+	inherit	Use the text-transform value from the parent element
+
+
+LINE-HEIGHT PROPERTY
+
+CSS offers the line-height property to change the height of each line in a block of text. As the name suggests, it changes the amount of vertical space that each line of text gets. syntax:
+	
+	p{
+		font-size: 20px;
+		line-height:25px;
+	}
+
+ADJUSTING THE HOVER STATE OF AN ANCHOR TAG
+
+A pseudo-class is a keyword that can be added to selectors, in order to select a specific state of the element.
+For example, the styling of an anchor tag can be changed for its hover state using the ":hover pseudo-class selector". Here's the CSS to change the color of the anchor tag to red during its hover state:
+
+	a:hover {
+		color:red;
+	}
