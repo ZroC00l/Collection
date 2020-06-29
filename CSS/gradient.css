@@ -1,0 +1,19 @@
+/* This document illustrates the styling that goes into creating
+ and wroking with gradient colors in css*/
+
+
+ .linear-gradient{
+    width: 40%;
+    height: 500px;
+    margin: auto;
+    background:linear-gradient(45deg, #99ff33, #990099);
+    border-radius: 35%;
+ }
+
+ .repeat-gradient{
+    width: 40%;
+    height: 500px;
+    margin: auto;
+    background:repeating-linear-gradient(35deg, #ff80ff 0px, #80ffff 30px,#bbff33 30px,#ffff33 60px);
+    border-radius: 35%;
+ }

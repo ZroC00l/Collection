@@ -152,3 +152,12 @@ The following is an example to create a colour using the hsl property:
 		blue	hsl(240, 100%, 50%)
 		magenta	hsl(300, 100%, 50%) 
 
+Now we look into another css property called gradient. There are 2 functions that css provides us with to work gradient colors and these are:
+	
+		1.linear-gradient(gradient-direction-in-degrees, color1,color2,...)
+		2.repeating-linear-gradient(gradient-direction-in-degrees,color1 starting-point in px, color2 ending-point-in px,color3 starting-point-in px, color4 ending-point-in px)
+
+		eg.
+
+			 background: linear-gradient(35deg,#CCFFFF, #FFCCCC);
+			  background: repeating-linear-gradient(35deg,#CCFFFF 0px, #FFCCCC 30px, #FFBBBB 30px, #FFAAAA 60px);
