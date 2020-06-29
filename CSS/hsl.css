@@ -1,5 +1,5 @@
-/* This style sheet shows how the hsl property works when adjusting the 
-	tone and shade of a color */
+/* This style sheet shows how the hsl property and linear-gradient() function
+    work when adjusting the tone and shade of a color */
 
 header{
     background-color: hsl(180,90%,35%);
@@ -24,4 +24,12 @@ nav li{
 a{
     text-decoration:none;
     color:inherit;
+}
+
+.gradient{
+    border-radius:30%;
+    width:70%;
+    height:400px;
+    margin: 50px auto;
+    background: linear-gradient(35deg,#CCFFFF, #FFCCCC);
 }
