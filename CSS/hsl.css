@@ -1,0 +1,27 @@
+/* This style sheet shows how the hsl property works when adjusting the 
+	tone and shade of a color */
+
+header{
+    background-color: hsl(180,90%,35%);
+    color: #FFFFF;
+}
+
+nav{
+    background-color: hsl(180,80%,25%);
+
+}
+
+nav ul{
+    margin: 0px;
+    padding: 5px 0px 5px 30px;
+}
+
+nav li{
+    display: inline;
+    margin-right: 20px;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}

@@ -135,4 +135,20 @@ so orange in the color wheel is known as a tertirary color.So to get a tertriary
 ADJUST THE COLOR OF VARIOUS ELEMENTS TO COMPLEMENTARY COLORS
 In this color challenge they show us how the dominant color and its compliment are used side by side to create a strong visual contrast, remember too much color kills, thhe site needs to have s strong visual presence while highlighting the content of the page which is the most important part, so take care when using colors and their compliments and not overdo it.
 
- 
+There are many ways to adjust the color property, one such a way is by using the rgba color model and using the opacity variable to ajdust the opaqueness of the color.
+
+CSS also provides us with another alternative way of slecting a color and this property is called hsl() color property and takes in 3 parameters which are the basic characteristics of a color:
+	
+		1.Hue = this is what people think of as the color, hue uses a color wheel to determine the color with the value of hue ranging from 0 to 360 as means for selecting a color;
+		2.Saturation = this is the amount of gray in the color. The unit of measure is percentages(%) with 100% symoblizing a fulley saturated color (meaning no gray color is present) and 0% representing a fully saturated color of gray. 
+		3.Lightness =  this is the amount of white or black in the color. We use the percentage(%) as a unit of measure , with 100% representing a fully white color and 0% representing a fully black color and 50% representing a normal color.
+
+The following is an example to create a colour using the hsl property:
+
+		red		hsl(0, 100%, 50%)
+		yellow	hsl(60, 100%, 50%)
+		green	hsl(120, 100%, 50%)
+		cyan	hsl(180, 100%, 50%)
+		blue	hsl(240, 100%, 50%)
+		magenta	hsl(300, 100%, 50%) 
+
