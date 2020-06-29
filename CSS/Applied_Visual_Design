@@ -161,3 +161,36 @@ Now we look into another css property called gradient. There are 2 functions tha
 
 			 background: linear-gradient(35deg,#CCFFFF, #FFCCCC);
 			  background: repeating-linear-gradient(35deg,#CCFFFF 0px, #FFCCCC 30px, #FFBBBB 30px, #FFAAAA 60px);
+
+CREATING A TEXTURE BY ADDING A SUBTLE PATTERN AS THE BACKGROUND IMAGE
+
+CSS provides us with the url() fucntion that goes hand in hand with the background property, this allows us to use an image as pattern for our background to make it stand out and more interesting like colors , becarefule to not overdo it as it takes focus away from the content that the web page is meant deliver.
+
+USING CSS TRANSFORM SCALE PROPERTY TO CHANGE THE SIZE OF AN ELEMENT
+CSS provides us the the transform property along with its scale() function which allows us to modify the size of an element, the following is a an example to increase the scale of all paragraph elements by 2:
+	
+	p{
+		transform: scale(2); 
+	}
+the transform poerty provides us witha variety of functionality that can be applied to elements to name a few :
+	1.move()
+	2.skew()
+	3.rotate()
+
+the above are some of the functions that can be used with the transform property on elements to modify them.
+We can also pair the tranform property with psuedo-classes like :hover inorder to make the elements interactive.
+The following is an example to increase a div element by 1.1 when a cursor hovers over the element:
+
+	<style>
+		div:hover{
+
+			transform:scale(1.1);
+		}
+
+	<style>
+The skewX(degrees-to-skewby) tranform function skews the element by a specified number of degrees on the x-axis.
+The skewY(degrees-to-skewby) transform function skews the element to a specified number of degrees on the y-axis.
+	<body>
+		<div></div>
+	</body> 
+	
