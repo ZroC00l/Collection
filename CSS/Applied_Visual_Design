@@ -124,5 +124,14 @@ When elements are positioned to overlap (i.e. using position: absolute | relativ
 Another positioning technique is to center a block element horizontally. One way to do this is to set its margin to a value of auto.
 This method works for images, too. Images are inline elements by default, but can be changed to block elements when you set the display property to block.
 
+COLOR THEORY:LEARNING ABOUT COMPLIMENTARY COLORS
 
+Adding color to your content is a powerful way of adding visual interest on a page however a lot goes into selecting the right colors that compliment each other to create a strong visual presence, thus color theory, there are available online tools that can assisit one is finding the right complimentary colors to use of their websites, remember these are compilmentary cause they cancel each other when mixed to create a gray color. We use the color wheel to determine colors which are complimentary and those that are not ,in this wheel colors that appear next toeach other ar neighbours and if two colors appear opposite one another in the color wheel then they are considered to be complimentary colors.
 
+Secondary colors are those created from mixing two primary colors as in green+blue = cyan which is a secondary color and , red+blue=magenta , and  red+green=yellow, so cyan, yellow and magenta are secondary colors created from mixing two primary colors.
+We also have tertiary colors which are a result of mixing a primary color and a secondary neihbour color as in yellow+red = orange 
+so orange in the color wheel is known as a tertirary color.So to get a tertriary color one simply mixes one of the primary colors with one of the secondary colors.
+
+ADJUST THE COLOR OF VARIOUS ELEMENTS TO COMPLEMENTARY COLORS
+In this color challenge they show us how the dominant color and its compliment are used side by side to create a strong visual contrast, remember too much color kills, thhe site needs to have s strong visual presence while highlighting the content of the page which is the most important part, so take care when using colors and their compliments and not overdo it.
+ 

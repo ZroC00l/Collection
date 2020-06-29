@@ -1,0 +1,33 @@
+/* This style sheet shows the different styling properties added to a 
+stylesheet to create complimentary colors for a webpage to create a string visual contrast*/
+
+body{
+    background-color:#FFFFFF;
+}
+
+header{
+    color:#FFFFFF;
+    background-color:#09A7A1;
+    padding:0.25em;
+}
+
+h2{
+    color:#09A7A1;
+}
+
+.spacing{
+    line-height: 25px;
+    text-align:justify;
+}
+
+button{
+    color:#FFFFFF;
+    background-color:#FF790E;
+}
+
+footer{
+    color:#FFFFFF;
+    background-color:#09A7A1;
+    padding:0.5em;
+}
+
