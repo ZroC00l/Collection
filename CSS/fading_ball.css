@@ -1,0 +1,39 @@
+/*This stylesheet illustrates the styling that goes in creating
+a ball that has the fading effect as it moves */
+
+
+header{
+	background-color: #000000;
+	color:#33ff33;
+	padding:25px;
+	height:75px;
+
+}
+
+h1{
+font-family:'Finger Paint', cursive;
+
+}
+
+#ball{
+
+	background: linear-gradient(35deg,#ccff33,#ff99cc);
+	border-radius: 50%;
+	height:70px;
+	width:70px;
+	position:fixed;
+	margin: 50px auto;
+	top:30%;
+	left:10%;
+	animation-name: fade;
+	animation-duration: 10s;
+	transform:scale(2.5);
+}
+
+@keyframes fade{
+
+	50%{
+		left:80%;
+		opacity: 0.1;
+	}
+}
