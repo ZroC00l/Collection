@@ -218,3 +218,30 @@ There are 8 animation properties but the two most important are:
 
 Animation properties control  the behaviour of the animation while the CSS @keyframes control what happens during the animation.
 Keyframes are measured using percentages , these percentages represent movement at each step of the way as the animation is acting out the scene for instance 0% marks the opening scene, this is the animation state before it starts and 100% is the animation state at the end of its duration.
+
+USING CSS ELEMENT TO CHANGE THE HOVER STATE OF A BUTTON
+
+To change the hover state of a button element you need use apply the :hover pseudo element on the button element and then set the keyframes to a single entry of a 100%. the following is a code snippet of how to achieve such a functionality:
+
+	<style>
+		button:hover{
+			background-color: #4791d0;
+			animation-name: button;
+			animation-duration: 500ms;
+
+		}
+
+		@keyframes button{
+
+			100%{
+
+
+			}
+
+		}
+
+	</style>
+	<body>
+		<button>Sign up </button>
+	</body>
+
