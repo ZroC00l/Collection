@@ -1,4 +1,4 @@
-INTRODUCTION TO APPLIED VISUAL DESIGN 
+sINTRODUCTION TO APPLIED VISUAL DESIGN 
 HTML is responsible for the structure and semantics of a page's content while CSS is in charge of the layout and appearance
 This section covers the basic tools developers use to create their own visual design
 
@@ -194,3 +194,7 @@ The skewY(degrees-to-skewby) transform function skews the element to a specified
 		<div></div>
 	</body> 
 	
+
+CREATING A GRAPHIC USING CSS
+
+To able to achieve this functionality we will be suing the box-shadow property along with the border-radius property to create a cresent moon element.To achieve this you need to set the border-radius to 50% to get a round element this will represent the moon.Then you will need to set the background color of the element to transparent then set the box-shadow properties as follows 25px 10px 0px 0px blue each representing x-offset,y-offset,blur-radius, spread radius and color.
