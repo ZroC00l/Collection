@@ -1,0 +1,11 @@
+/*This stylesheet shows the styling properties used in creating 
+a complex shape of a heart using pseudo elements*/
+
+header{
+    background-color: #ffffff;
+    color:#ff66ff;
+}
+
+h1{
+    font-family: 'Yellowtail', cursive;
+}

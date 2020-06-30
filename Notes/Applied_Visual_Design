@@ -198,3 +198,12 @@ The skewY(degrees-to-skewby) transform function skews the element to a specified
 CREATING A GRAPHIC USING CSS
 
 To able to achieve this functionality we will be suing the box-shadow property along with the border-radius property to create a cresent moon element.To achieve this you need to set the border-radius to 50% to get a round element this will represent the moon.Then you will need to set the background color of the element to transparent then set the box-shadow properties as follows 25px 10px 0px 0px blue each representing x-offset,y-offset,blur-radius, spread radius and color.
+
+CSS has the ability to create the most complex shapes by simply using pure CSS, however it requires the use of 2 new additional elements which are:
+		1. ::before pseudo element
+		2. ::after pseudo element
+
+together these two elements use the property called:
+		1. content
+
+to achieve the ability to create complex shapes. The content property is used to add something to the selected element that something can be text or an image or other elements.To create a complex shape like a heart for instance you will require to use both the before and after pseudo elements and set both of these elements' content property to empty . 
