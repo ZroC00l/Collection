@@ -1,0 +1,39 @@
+/*This stylesheet illustrates  hoq to apply the hover pseudo element
+to button element using animation properties*/
+
+header{
+    background-color: #000000;
+    color: #ccff33;
+    padding: 25px;
+    height: 75px;
+}
+
+h1{
+    font-family: 'Piedra',cursive;
+
+}
+
+button{
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    background-color:#0F5897;
+    color:#FFFFFF;
+    padding:5px 10px 8px 10px;
+    border-radius:5px;
+    transform: scale(1.5);
+}
+
+button:hover{
+
+    animation-name: react;
+    animation-duration:500ms;
+    animation-fill-mode: forwards;
+
+}
+@keyframes react{
+    100%{
+        background-color: #4791d0;
+    }
+}
+

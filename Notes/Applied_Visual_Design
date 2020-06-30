@@ -245,3 +245,7 @@ To change the hover state of a button element you need use apply the :hover pseu
 		<button>Sign up </button>
 	</body>
 
+Using the code above ypu will notice that the button only stays highlighted for 500ms then the animation stops even though the cursor is still hoverin g over the element, we can rectify this problem by addinganother CSS property called:
+	1.animation-fill-mode
+
+to make the button stay highlighted while the cursor is still hovering over it you need only include the above mentioned property and set its property value to "forwards".
