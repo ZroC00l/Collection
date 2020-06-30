@@ -2,10 +2,55 @@
 a complex shape of a heart using pseudo elements*/
 
 header{
-    background-color: #ffffff;
+    background-color: #000000;
+    height: 100px;
+    padding-top: 25px;
     color:#ff66ff;
 }
 
 h1{
     font-family: 'Yellowtail', cursive;
 }
+
+.heart{
+
+    position: absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin: auto;
+    background-color: red;
+    height: 50px;
+    width: 50px;
+    transform: rotate(-45deg);
+
+}
+
+/* Setting up the psuedo element properties */
+
+.heart::after{
+    content:"";
+    position:absolute;
+    top:0px;
+    left:25px;
+    height:50px;
+    width:50px;
+    background-color: red;
+    border-radius:50%;
+
+}
+
+
+.heart::before{
+
+    content: "";
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    left:0px;
+    top:-25px;
+    height:50px;
+    width:50px;
+}
+
