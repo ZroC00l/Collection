@@ -1,0 +1,62 @@
+/* This will be my file composing of all the css styles I have 
+	applied over the course of my web development self study*/
+body{
+    background-image: url("../images/ufc4.jpg");
+    background-color: black;
+}
+
+#navigation_header h1{
+   position:absolute;
+   left: 550px;
+   top:0px;
+   color:white;
+   background-color:silver;
+   font-family: Lobster, sans-serif;
+}
+
+#header_container h2{
+   position: absolute;
+   left:515px;
+   top: 140px;
+   color:#CCFF00;
+   font-family:MuseoModerno,cursive;
+   background-color:silver;
+}
+.heavy_weight_container{
+    position:absolute;
+    left: 0px;
+    top:200px;
+    height:auto;
+    width: 1000px;
+    background-color:silver;
+}
+/*This adds a border around the container*/
+.heavy_weight_container {
+    height:auto;
+    border-color:#CCFF00;
+    border-width:5px;
+    border-style:solid;
+}
+.heavy_weight_container img{
+    float:left;
+    width:200px;
+    height:200px;
+}
+
+.heavy_weight_container ul {
+
+    vertical-align:text-top;
+    margin:auto;
+    right:0px;
+    position:relative;
+
+}
+
+.heavy_weight_container p {
+   vertical-align: text-bottom;
+   position: relative;
+
+}
+
+
+

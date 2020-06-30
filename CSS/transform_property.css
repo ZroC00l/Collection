@@ -1,0 +1,71 @@
+/*This stylesheet illustrates how to work with the transform property
+and its supporting functions*/
+header  {
+
+    background-color: hsl(340, 100%, 80%);
+    color:#FFFFFF;
+    padding: 0.25em;
+}
+
+h1{
+    color:#FFFFFF;
+}
+
+nav{
+    background-color: hsl(340, 800%, 70%)
+}
+
+nav ul{
+    margin:auto;
+    padding: 5px 0px 5px 30px;
+}
+
+nav li{
+    display: inline;
+    margin-right: 20px;
+}
+
+a:{
+    text-decoration:none;
+    color:inherit;
+}
+
+.linear-gradient{
+    width: 15%;
+    height: 200px;
+    background: linear-gradient(90deg,#aa80ff, #ff66ff);
+    border-radius: 35%;
+    margin:auto;
+}
+
+.repeat-gradient{
+     width: 15%;
+     height: 200px;
+     background: repeating-linear-gradient(65deg,#aa80ff 0px, #ff66ff 30px,#66e0ff 30px,#bbff33 60px);
+     border-radius: 35%;
+     margin:auto;
+ }
+
+.scale{
+    margin:auto;
+    background-color: #4dff4d;
+    width: 15%;
+    height: 200px;
+    transform: scale(1.5)
+}
+
+.skew-x{
+    margin:auto;
+    width:15%;
+    height:200px;
+    transform: skewX(45deg);
+    background-color:rgb(255, 102, 179);
+}
+
+.skew-y{
+    margin:auto;
+    width:15%;
+    height:200px;
+    transform:skewY(45deg);
+    background-color:hsl(330, 100%, 80%);
+}

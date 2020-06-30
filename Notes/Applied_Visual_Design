@@ -1,0 +1,200 @@
+sINTRODUCTION TO APPLIED VISUAL DESIGN 
+HTML is responsible for the structure and semantics of a page's content while CSS is in charge of the layout and appearance
+This section covers the basic tools developers use to create their own visual design
+
+Text is a huge part of a page's content, thus CSS provides us with several options for how to align text
+using the text-align property and its attributes which are:
+	
+	1.Justify- this will cause all the lines of the text except for the last line to meet the left and right edges of the box line.
+	2.Center- this centers the text
+	3.Left- aligns text to the left
+	4.Right-aligns text to the right
+
+We can set an element's width by using the width property, and we can give the width value as a relative length unit using rem and em length units or give the width an absolute length by usin gthe px and percentage units of length
+
+We can set the height an of element by using CSS's height property.
+To make a certain text bold in HTML we wrap that text with the strong tag as is:
+
+	<p> Hello <strong>World</strong>, I write Code</p> 
+
+wrapping the text "World" with the strong tags will result in the text shown in bold.There CSS alternative to making a text bold is to use CSS property called font-weight with bold as its value as in:
+	 "font-weight: bold;"
+To underline text in HTML we show that specific text is important, this is not to be cofused for a link.
+We use the "u" tag to achieve is ability , however in CSS we use the "text-decoration" property and give it a value of "underline" as in : 
+
+	text-decoration: underline;
+
+To emphasize a peice of text we use the em tag, this will show the text wrapped within the em tags in italics
+In CSS to show a text in italics we use the "font-style" property with the value "italic" to achive this ability:
+	
+	font-style: italic;
+
+To Show that piece of text is no longer valid we use the strikethrough tag to show this, in HTML we simply wrap the text around the <s> tag and in CSS we use the text-decoration property with the value "line-through"  as in:
+	
+	text-decoration: line-through;
+
+You can use the <hr> tag to add a horizontal line across the width of its containing element. This can be used to define a change in topic or to visually separate groups of content. hr is a self enclosing tag meaning it has no closing tag.
+
+We can add a background color to a text to emphasize it instead of changing the actual color of the text, think of it as if you are highlighting the text , to achieve this ability we merely give the text a background-color property and use the "rgba" color system
+the rgba color system is different from the normal rgb and hex code color system in that it has the aplha value which allows us to control the opacity of the color, the alpha value can take a value between 0 and 1 with 0 reprenting clearity or transparency and 1 representing a solid color.
+
+HTML provides us with 6 header tags(h1 through h6) each differing in size with h1 being the biggest and h6 being the smallest. We can manipulate the sizes of each of these tags using the CSS property called "font-size" and with units of abosolute length(px or %) and relative length(rem and em).
+
+ADDING BOX-SHADOW PROPERTY TO A CARD LIKE ELEMENT
+
+The box-shadow property applies one or more shadows to an element.
+
+The box-shadow property takes values for
+
+offset-x (how far to push the shadow horizontally from the element),
+offset-y (how far to push the shadow vertically from the element),
+blur-radius,
+spread-radius and
+color, in that order.
+The blur-radius and spread-radius values are optional.
+
+Multiple box-shadows can be created by using commas to separate properties of each box-shadow element.
+
+Here's an example of the CSS to create multiple shadows with some blur, at mostly-transparent black colors:
+
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+CSS provides us with the opacity property which we can  use to adjust the opacity or rather the transparency of the text,the opacity property takes a value between 0 and 1 , with 0 symbolizing complete transparency and 0.5 half transparency and 1 complete solid color meaning no transparent.
+
+CSS provides us with a nifty property called text-transform which can be used to change the appearance of text without having to manually change the text yourself. Text-transfrom can be used to manipulate the appearance of the webpage text so that is appears consistently throughout the webpage. It has the following property values :
+	
+		Value	Result
+	lowercase	"transform me"
+	uppercase	"TRANSFORM ME"
+	capitalize	"Transform Me"
+	initial	Use the default value
+	inherit	Use the text-transform value from the parent element
+
+
+LINE-HEIGHT PROPERTY
+
+CSS offers the line-height property to change the height of each line in a block of text. As the name suggests, it changes the amount of vertical space that each line of text gets. syntax:
+	
+	p{
+		font-size: 20px;
+		line-height:25px;
+	}
+
+ADJUSTING THE HOVER STATE OF AN ANCHOR TAG
+
+A pseudo-class is a keyword that can be added to selectors, in order to select a specific state of the element.
+For example, the styling of an anchor tag can be changed for its hover state using the ":hover pseudo-class selector". Here's the CSS to change the color of the anchor tag to red during its hover state:
+
+	a:hover {
+		color:red;
+	}
+
+CHANGE AN ELEMENT'S RELATIVE POSITION
+
+CSS treats each HTML element as its own box, which is usually referred to as the CSS Box Model. Block-level items automatically start on a new line (think headings, paragraphs, and divs) while inline items sit within surrounding content (like images or spans). The default layout of elements in this way is called the normal flow of a document, but CSS offers the position property to override it.
+
+Block level elements like div, p and headings cover the whole width meaning they dont allow any element to appear next to it, hence the position property, this allows us to override the normal flow of the layout.
+
+When the position of an element is set to relative, it allows you to specify how CSS should move it relative to its current position in the normal flow of the page. It pairs with the CSS offset properties of left or right, and top or bottom. These say how many pixels, percentages, or ems to move the item away from where it is normally positioned. The following example moves the paragraph 10 pixels away from the bottom:
+
+p {
+  position: relative;
+  bottom: 10px;
+}
+
+Changing an element's position to relative does not remove it from the normal flow - other elements around it still behave as if that item were in its default position. Note: Positioning gives you a lot of flexibility and power over the visual layout of a page. It's good to remember that no matter the position of elements, the underlying HTML markup should be organized and make sense when read from top to bottom
+
+
+CHANGE AN ELEMENT'S POSITION USING ABSOLUTE AND FIXED
+The next option for the CSS position property is absolute, which locks the element in place relative to its parent container. Unlike the relative position, this removes the element from the normal flow of the document, so surrounding items ignore it. The CSS offset properties (top or bottom and left or right) are used to adjust the position.
+
+One nuance with absolute positioning is that it will be locked relative to its closest positioned ancestor. If you forget to add a position rule to the parent item, (this is typically done using position: relative;), the browser will keep looking up the chain and ultimately default to the body tag.
+
+The next layout scheme that CSS offers is the fixed position, which is a type of absolute positioning that locks an element relative to the browser window. Similar to absolute positioning, it's used with the CSS offset properties and also removes the element from the normal flow of the document.
+One key difference between the fixed and absolute positions is that an element with a fixed position won't move when the user scrolls.
+
+POSITIONING ELEMENTS WITH FLOAT PROPERTY
+T
+he next positioning tool does not actually use position, but sets the float property of an element. Floating elements are removed from the normal flow of a document and pushed to either the left or right of their containing parent element. It's commonly used with the width property to specify how much horizontal space the floated element requires.
+
+When elements are positioned to overlap (i.e. using position: absolute | relative | fixed | sticky), the element coming later in the HTML markup will, by default, appear on the top of the other elements. However, the z-index property can specify the order of how elements are stacked on top of one another. It must be an integer (i.e. a whole number and not a decimal), and higher values for the z-index property of an element move it higher in the stack than those with lower values.syntax:
+		
+		z-index: value;
+
+Another positioning technique is to center a block element horizontally. One way to do this is to set its margin to a value of auto.
+This method works for images, too. Images are inline elements by default, but can be changed to block elements when you set the display property to block.
+
+COLOR THEORY:LEARNING ABOUT COMPLIMENTARY COLORS
+
+Adding color to your content is a powerful way of adding visual interest on a page however a lot goes into selecting the right colors that compliment each other to create a strong visual presence, thus color theory, there are available online tools that can assisit one is finding the right complimentary colors to use of their websites, remember these are compilmentary cause they cancel each other when mixed to create a gray color. We use the color wheel to determine colors which are complimentary and those that are not ,in this wheel colors that appear next toeach other ar neighbours and if two colors appear opposite one another in the color wheel then they are considered to be complimentary colors.
+
+Secondary colors are those created from mixing two primary colors as in green+blue = cyan which is a secondary color and , red+blue=magenta , and  red+green=yellow, so cyan, yellow and magenta are secondary colors created from mixing two primary colors.
+We also have tertiary colors which are a result of mixing a primary color and a secondary neihbour color as in yellow+red = orange 
+so orange in the color wheel is known as a tertirary color.So to get a tertriary color one simply mixes one of the primary colors with one of the secondary colors.
+
+ADJUST THE COLOR OF VARIOUS ELEMENTS TO COMPLEMENTARY COLORS
+In this color challenge they show us how the dominant color and its compliment are used side by side to create a strong visual contrast, remember too much color kills, thhe site needs to have s strong visual presence while highlighting the content of the page which is the most important part, so take care when using colors and their compliments and not overdo it.
+
+There are many ways to adjust the color property, one such a way is by using the rgba color model and using the opacity variable to ajdust the opaqueness of the color.
+
+CSS also provides us with another alternative way of slecting a color and this property is called hsl() color property and takes in 3 parameters which are the basic characteristics of a color:
+	
+		1.Hue = this is what people think of as the color, hue uses a color wheel to determine the color with the value of hue ranging from 0 to 360 as means for selecting a color;
+		2.Saturation = this is the amount of gray in the color. The unit of measure is percentages(%) with 100% symoblizing a fulley saturated color (meaning no gray color is present) and 0% representing a fully saturated color of gray. 
+		3.Lightness =  this is the amount of white or black in the color. We use the percentage(%) as a unit of measure , with 100% representing a fully white color and 0% representing a fully black color and 50% representing a normal color.
+
+The following is an example to create a colour using the hsl property:
+
+		red		hsl(0, 100%, 50%)
+		yellow	hsl(60, 100%, 50%)
+		green	hsl(120, 100%, 50%)
+		cyan	hsl(180, 100%, 50%)
+		blue	hsl(240, 100%, 50%)
+		magenta	hsl(300, 100%, 50%) 
+
+Now we look into another css property called gradient. There are 2 functions that css provides us with to work gradient colors and these are:
+	
+		1.linear-gradient(gradient-direction-in-degrees, color1,color2,...)
+		2.repeating-linear-gradient(gradient-direction-in-degrees,color1 starting-point in px, color2 ending-point-in px,color3 starting-point-in px, color4 ending-point-in px)
+
+		eg.
+
+			 background: linear-gradient(35deg,#CCFFFF, #FFCCCC);
+			  background: repeating-linear-gradient(35deg,#CCFFFF 0px, #FFCCCC 30px, #FFBBBB 30px, #FFAAAA 60px);
+
+CREATING A TEXTURE BY ADDING A SUBTLE PATTERN AS THE BACKGROUND IMAGE
+
+CSS provides us with the url() fucntion that goes hand in hand with the background property, this allows us to use an image as pattern for our background to make it stand out and more interesting like colors , becarefule to not overdo it as it takes focus away from the content that the web page is meant deliver.
+
+USING CSS TRANSFORM SCALE PROPERTY TO CHANGE THE SIZE OF AN ELEMENT
+CSS provides us the the transform property along with its scale() function which allows us to modify the size of an element, the following is a an example to increase the scale of all paragraph elements by 2:
+	
+	p{
+		transform: scale(2); 
+	}
+the transform poerty provides us witha variety of functionality that can be applied to elements to name a few :
+	1.move()
+	2.skew()
+	3.rotate()
+
+the above are some of the functions that can be used with the transform property on elements to modify them.
+We can also pair the tranform property with psuedo-classes like :hover inorder to make the elements interactive.
+The following is an example to increase a div element by 1.1 when a cursor hovers over the element:
+
+	<style>
+		div:hover{
+
+			transform:scale(1.1);
+		}
+
+	<style>
+The skewX(degrees-to-skewby) tranform function skews the element by a specified number of degrees on the x-axis.
+The skewY(degrees-to-skewby) transform function skews the element to a specified number of degrees on the y-axis.
+	<body>
+		<div></div>
+	</body> 
+	
+
+CREATING A GRAPHIC USING CSS
+
+To able to achieve this functionality we will be suing the box-shadow property along with the border-radius property to create a cresent moon element.To achieve this you need to set the border-radius to 50% to get a round element this will represent the moon.Then you will need to set the background color of the element to transparent then set the box-shadow properties as follows 25px 10px 0px 0px blue each representing x-offset,y-offset,blur-radius, spread radius and color.

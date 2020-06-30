@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Hover Event</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="jquery-3.5.1.js"></script>
+</head>
+
+<body>
+<h1>Mouse Hovering Effect</h1>
+<hr>
+<br/>
+<br/>
+<span class="box">Box 1</span>
+<span class="box">Box 2</span>
+<span class="box">Box 3</span>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".box").hover(function(){
+            $(this).css("background-color","yellow");
+        },
+        function(){
+            $(this).css("background-color","pink");
+        }
+      );
+    });
+
+</script>
+
+</body>
+
+</html>

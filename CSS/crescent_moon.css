@@ -1,0 +1,30 @@
+/*This stylesheet shows the styling properties used in creating a
+	crescent moon using the div element*/
+
+header{
+     background-color: black;
+     color: #4dffff;
+     height: 100px;
+     padding-top: 25px;
+
+}
+
+h1{
+    font-family: Lobster, cursive;
+
+}
+
+#moon{
+    background-color: transparent;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    border-radius: 50%;
+    transform: scale(1.5);
+    box-shadow: 25px 10px 0px 0px #c2f0f0;
+}
