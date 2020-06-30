@@ -207,3 +207,14 @@ together these two elements use the property called:
 		1. content
 
 to achieve the ability to create complex shapes. The content property is used to add something to the selected element that something can be text or an image or other elements.To create a complex shape like a heart for instance you will require to use both the before and after pseudo elements and set both of these elements' content property to empty . 
+
+
+WORKING WITH CSS @KEYFRAMES AND ANIMATION PROPERTIES
+
+To animate an element you need to know about the animation properties and CSS @keyframes.
+There are 8 animation properties but the two most important are:
+	1.animation-name= this is the name of the animation that is used by keyframes to determine which rule should go with which animation.
+	2.animation-duration= this is the length of time it takes the animation to act out the scene.
+
+Animation properties control  the behaviour of the animation while the CSS @keyframes control what happens during the animation.
+Keyframes are measured using percentages , these percentages represent movement at each step of the way as the animation is acting out the scene for instance 0% marks the opening scene, this is the animation state before it starts and 100% is the animation state at the end of its duration.

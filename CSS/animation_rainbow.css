@@ -1,0 +1,66 @@
+/*This stylesheet shows the CSS properties used in creating 
+animation and working with CSS keyframes*/
+
+header{
+    background-color:#000000;
+    color: #a3a375;
+    padding-top: 25px;
+    height:100px;
+
+}
+
+h1{
+    font-family: 'Indie Flower', cursive;
+}
+
+#animated-rainbow{
+
+    margin:auto;
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    background-color: #000000;
+    height: 100px;
+    width: 800px;
+    border-radius: 15%;
+
+}
+#animated-rainbow{
+
+    animation-name: rainbow;
+    animation-duration: 15s;
+}
+
+@keyframes rainbow{
+    0%{
+        background-color: #1aff1a;
+
+    }
+
+    20%{
+        background-color: #cc66ff;
+
+    }
+
+    40%{
+
+        background-color:#ff4da6;
+    }
+
+    60%{
+        background-color: #ccff33;
+
+    }
+
+    80%{
+        background-color: #66ffff;
+    }
+
+    100%{
+        background-color:#e6e600;
+
+    }
+
+}
