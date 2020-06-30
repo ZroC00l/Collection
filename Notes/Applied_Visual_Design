@@ -249,3 +249,6 @@ Using the code above ypu will notice that the button only stays highlighted for 
 	1.animation-fill-mode
 
 to make the button stay highlighted while the cursor is still hovering over it you need only include the above mentioned property and set its property value to "forwards".
+
+MOTION USING ANIMATION
+To add motion to an element requires the use of the position properties namely top,bottom, right and left, manipulating each of these variables inside of the keyframes rules at each unit of measurement 0%,50%,100% creates motion.

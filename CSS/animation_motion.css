@@ -1,0 +1,51 @@
+/*This stylsheet illustrates how add motion to our animation by
+	manipulating the position properties*/
+
+header{
+
+	background-color: #000000;
+	color:#ff1a66;
+	height:75px;
+	padding-top: 25px;
+}
+
+h1{
+	font-family: 'Merienda One',cursive;
+}
+
+div{
+
+	background-color: #ff66ff;
+	height: 300px;
+	width: 300px;
+	border-radius:50%;
+	position:fixed;
+	right: 50%;
+
+}
+
+#movement{
+	animation-name: move;
+	animation-duration: 10s;
+}
+
+@keyframes move{
+
+	0%{
+		background-color: #000000;
+		top: 0px;
+		left:0px;
+	}
+
+	50%{
+		background-color: #004d99;
+		top:50px;
+		left:25px;
+	}
+
+	100%{
+		background-color: #c6ff1a;
+		top: 0px;
+		left: -25px;
+	}
+}
