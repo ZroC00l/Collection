@@ -275,3 +275,15 @@ CSS provides us with yet another interesting animation property called :
 		-linear- this applies the same timing speed from the beginning of the animation to the end of it.
 		-ease-out- applies a sudden quickness to the animated element at the beginningof transition then slows towards the end
 		-ease-in- starts out slow in the beginning of transition and speeds up towards the end of the transition
+
+The animation property animation-timing-function has yet another property value in the form of a function called the :
+	
+	1. cubic-bezier function= This function controls the shape of the animated element as it plays out, it uses 4 point two of which are already given or set for us this is the origin points (1,1) the rest of the 4 points namley:
+
+			-x1
+			-x2
+			-y1
+			-y2
+The folowing is an example to illustate the linear property of the animation-timing-function:
+	
+	animation-timing-function:cubic-bezier(0.25,0.25,0.75,0.75);
