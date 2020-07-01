@@ -259,4 +259,6 @@ Another animation property we look at is the :
 This property coiunts the number of times an animation should repeat, we can set the loop to any positive number , if we want the animation to repeat continously all thats required is to use "infinite" as the property value as in:
 	
 	animation-iteration-count: infinite;
-	
+
+CREATING A HEART BEAT ANIMATION
+We can use CSS animation property together with the :before and :after pseudo elements to create the effect, note to achieve this effect we are going to need to use two transform properties namely: scale and rotate inside of the keyframes rule and we rotate by -45degrees at 2 framework measures of unit 0% and 50%. 
