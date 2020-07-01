@@ -252,3 +252,11 @@ to make the button stay highlighted while the cursor is still hovering over it y
 
 MOTION USING ANIMATION
 To add motion to an element requires the use of the position properties namely top,bottom, right and left, manipulating each of these variables inside of the keyframes rules at each unit of measurement 0%,50%,100% creates motion.
+
+Another animation property we look at is the :
+	1. animation-iteration-count
+
+This property coiunts the number of times an animation should repeat, we can set the loop to any positive number , if we want the animation to repeat continously all thats required is to use "infinite" as the property value as in:
+	
+	animation-iteration-count: infinite;
+	
