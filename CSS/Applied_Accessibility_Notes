@@ -92,3 +92,14 @@ The following is an example to wrap radio buttons using fieldset and legend:
 			<input type="radio" id="javascript" name="javascript> value="languages">
 			<label for="javascript">Javascript</label>
 	<fieldset>
+
+One of the new features of HTML5 is using the date attribute in the input element, the date attribute simplifies filling in dates when using forms, the following is an example of how to use the date attribute:
+	
+	<input type="date" id="the_Date" name="date_Select">
+HTML extends on the date attribute by offering us element called time with its associated attribute datetime.The time element is an inline element that can wrap a time or date on a page.The follwoing is an exampl,e of working with the time element and datetime attribute:
+		
+		<time datetime="2020-07-02">Thursday, 2<sup>nd</sup>. </time>
+
+HTML5 has an interesting attribute that can be sued for navigating through html elements using the keyboard only, this attribute is called "accesskey" and is given an attribute value of any keyboard key . We apply accesskey attributre to elements like buttons, links and forms to make it easy to navigate to the the elements. The following is an example of using the accesskey attribute:
+	
+	<a href="" accesskey="a" >click here to go to site</a>
