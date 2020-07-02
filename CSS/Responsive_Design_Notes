@@ -1,1 +1,35 @@
 INTRODUCTION TO WEB DEIGN PRINCIPLES
+
+Responsive web design refers to the process of making your web content respond to consttraints of various devices.This means the structure and the CSS rules should be flexible enough to accomodate these differences.You should always design your CSS to target your audience , if its mobile users then take a mobile-first approach when designing the CSS, then add conditional rules for larger screen users.If the target is desktop users then center your design around the desktop with added conditional rules for small screens.
+
+We will be Looking at how to use CSS to make our web pages responsive through a process of solving challenges
+
+CREATING A MEDIA QUERY
+
+Media queries are used to change the presentation of content based of the different viewport sizes.
+Viewport is a user's visible area of a web page and it varies depending on devices used to access the sites.
+
+Media queries consist of a type and if the media type matches the type of device the document(this can be a web page of a site) is opened on, then the styles will be applied.There can be as many selectors and styles inside of the media query as needed by the user.
+
+The folliwng are example applications of a media query:
+	
+	this media query returns the content when the device's width is less than or equal to 100px:
+
+@media (max-width: 100px) { /* CSS Rules */ }
+
+
+	this media query returns the content when the device's height is more than or equal to 350px
+@media (min-height: 350px) {/*CSS Rules*/}	
+
+Note: The CSS inside of the media query is only applied if the type of the media query matches the type of device the content is displayed on.
+
+Add a media query, so that the p tag has a font-size of 10px when the device's height is less than or equal to 800px.
+	
+	solution:
+
+			@media (max-height:800px){
+
+				p{
+					font-size:10px;
+				}
+			}
