@@ -34,4 +34,18 @@ Semantic meaning means that the tag you use around your content should indicate 
 				<h5> another nested subsection</5>
 
 	<h2>Conclusion</h2>
-		
+
+HTML5 NEW ELEMENTS 
+HTML5 provides us with 6 new elements that can be used to structure content in a visually pleasing manner, these new elements are also equipped with accessibility features that caters for those with impairments.These new elements are:
+	
+	1.Header
+	2.Main
+	3.Article
+	4.Section
+	5.Nav
+	6.Footer
+
+The main tag is used to wrap your main content like the name implies.There can only be one main element per web page. It doesnt allow items that repeat to be wrapped inside it , these repeatable items include navaigation links and banners.
+
+The Article tag is used as a sectioning element for independent and stand-alone content , unlike the Section tag which is used primarily for grouping thematically related content, the Article tag is a stand-alone tag.
+
