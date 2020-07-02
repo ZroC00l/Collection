@@ -69,4 +69,26 @@ HTML5 provides us with yet another set of tags used for representing visual elem
 	1.Figure 
 	2.Fifcaption
 
-Used together these two elements can wrap a visual element together with its caption in a proper visual manner, these tags used on images, graphs, charts and diagrams.
+Used together these two elements can wrap a visual element together with its caption in a proper visual manner, these tags used on images, graphs, charts and diagrams.Note that the figcaption tag goes inside the figure tag and can also be comnined with other elements like the img tag.The following is an example of using the two tags:
+	
+	<figure>
+		<img src="graph.jpeg" alt="bar graph">
+		<br>
+		<figcaption>
+			This is my bar graph caption
+		</figcaption>
+	</figure>
+
+In the earlier sections when we did HTML we covered forms and using various button, remember that to group buttons that belonged to the same group we required the use of the for and id attributes , the for attribute used within the label tags had to have the same name as the id attribute used inside the input element.This allowed the buttons to be grouped together , however there is a much better way to group button and in visually pleasing manned and thats to wrap the buttons inside the "fieldset" tag and give the fieldset and legend using the "legend" tag , this legend tag will give the grouped elements a description.
+
+The following is an example to wrap radio buttons using fieldset and legend:
+
+	<fieldset>
+		<legend>List of Programming Lanaguages</legend>
+			<input type="radio" id="java" name="java" value="languages">
+			<label for="java">Java</label>
+			<input type="radio" id="c++" name="c++" value="languages">
+			<label for="c++">C++</label>
+			<input type="radio" id="javascript" name="javascript> value="languages">
+			<label for="javascript">Javascript</label>
+	<fieldset>
