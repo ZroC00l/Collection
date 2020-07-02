@@ -42,3 +42,40 @@ To make an image responsive you need only use two CSS properties:
 
 Max-width should be set to 100%  to make the image responsive, this makes sure the image is never wider than the container it is in.
 Height property should be set to auto, this allows the image to keep its original ration aspect.
+
+Resolution varies from device to device , so when using images in your content, take care of the Pixel density aspect as it varies from devices, for instance apple devies have started using the retina display so some of your images if you are not using a mac might apper pixelated to a mac user unless you alter the width and height properties of you image to be half of their original sizes.
+
+Set the width and height of the img tag to half of their original values. In this case, both the original height and the original width are 200px.
+
+<style>
+	img{
+		width:100px;
+		height:100px;
+	}
+</style>
+<body>
+	<img src="coolimage.jpeg" alt="Mt. kilimanjaro">
+</body>
+
+USING VIEWPORT UNITS TO SIZE UP TEXT
+
+We can manipulate text size through the use of viewport units, there are 4 types of viewport units provided for us by CSS:
+	
+	1. vw(viewport width) 10vw would be 10 percent of viewport's width
+	2. vh(viewport height) 3vh would be 3 percent of viewport's height
+	3. vmin(viewport minimum) 75vmin would be 75 percent of viewport's smaller dimension
+	4. vmax(viewport maximum)100vmax would be 100 percent of viewport's bigger dimension
+
+Set the width of the h2 tag to 80% of the viewport's width and the width of the paragraph as 75% of the viewport's smaller dimension.
+
+	solution:
+
+			<style>
+					h2{
+						width:80vw;
+					}
+					p{
+						width:75vmin;
+					}
+
+			</style>
