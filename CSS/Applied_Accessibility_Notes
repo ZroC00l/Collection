@@ -103,3 +103,7 @@ HTML extends on the date attribute by offering us element called time with its a
 HTML5 has an interesting attribute that can be sued for navigating through html elements using the keyboard only, this attribute is called "accesskey" and is given an attribute value of any keyboard key . We apply accesskey attributre to elements like buttons, links and forms to make it easy to navigate to the the elements. The following is an example of using the accesskey attribute:
 	
 	<a href="" accesskey="a" >click here to go to site</a>
+
+HTML5 has an attribute called "tabindex" this attribute allows the user to focus on html elements by using the keboard tab key.The tabindex attribute can takes an interger value whether negative or positive, however take note that when given the value of negative 1 this makes the element focusable but not reachable from the keyboard.
+
+	<div tabindex="0"> whatever goes here</div>
