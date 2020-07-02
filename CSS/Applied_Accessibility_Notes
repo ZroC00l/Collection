@@ -49,3 +49,24 @@ The main tag is used to wrap your main content like the name implies.There can o
 
 The Article tag is used as a sectioning element for independent and stand-alone content , unlike the Section tag which is used primarily for grouping thematically related content, the Article tag is a stand-alone tag.
 
+The Header tag is used to wrap introductory information or navigation links. It works well with content that is repeated a the top across multiple pages.
+
+USING THE AUDIO ELEMENT TO IMPROVE THE ACCESSIBILITY OF THE AUDIO CONTENT
+
+HTML5 provides us with the audio tag , this tag allows us to wrap audio stream or sound to our content.
+Audio tag uses an attribute called "controls" this add the play,stop and other controls , this ofcourse depends on the browser used.
+The audio tag supports two sound formats:
+	1.ogg
+	2.mpeg
+The following is syntax on how to include an audio tag :
+	
+	<audio id="" controls>
+		<source src="" type="audio/mpeg">
+		<source src="" type="audio/ogg">
+	<audio>
+
+HTML5 provides us with yet another set of tags used for representing visual elements :
+	1.Figure 
+	2.Fifcaption
+
+Used together these two elements can wrap a visual element together with its caption in a proper visual manner, these tags used on images, graphs, charts and diagrams.
