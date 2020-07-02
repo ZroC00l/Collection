@@ -32,4 +32,13 @@ Add a media query, so that the p tag has a font-size of 10px when the device's h
 				p{
 					font-size:10px;
 				}
+
 			}
+
+MAKING AN IMAGE RESPONSIVE
+To make an image responsive you need only use two CSS properties:
+	1. max-width
+	2. height
+
+Max-width should be set to 100%  to make the image responsive, this makes sure the image is never wider than the container it is in.
+Height property should be set to auto, this allows the image to keep its original ration aspect.
