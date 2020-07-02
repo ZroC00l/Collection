@@ -1,0 +1,37 @@
+INTRODUCTION TO APPLIED ACCESSSIBILITY
+
+In this section we will look at accessibility as a topic of interest. Accessibility has to do with having a web content and a user interface that is easily understood, can be navigated easily and used by a broad audience regardless of their ability or resources
+We will focus of 3 general aspects of accessibility:
+	1.Having a well structured  code , meaning using the proper markup.
+	2.Having text alternatives for non-text and visual content.
+	3.Easily navigated page that is keyboard friendly.
+
+USING THE ALT ATTRIBUTE
+
+Accroding to HTML5 standards its mandotory to include the alt attribute whenever using the img tag.
+The alt attribute is used for accessiblity puropses such as assisting the visually impaired in interpreting the markup used in the web page. Visually impared people rely in the use of screen readers to be able to convert web content to an audio interface so they can be able to understand it.
+
+There are cases ofcourse when you one needs to know where and when to apply the alt attribute. Alt attribute is neccessary to define but not necessary to associate a name to describe it in the following cases:
+	
+	1.When the img tag is used for decorative purposes there is no need to give your alt attirbute a name
+	2.When the img tag used is already described in the text content.
+	3.when images are captioned.
+
+USING HEADING TAGS TO SHOW HIERARCHICAL RELATIONSHIPS OF CONTENT
+
+HTML provides us with 6 heading tags(h1 to h6) when considering making your web content accessible to a broader range, you need to take special care of whenand where  to use each of the heading tags. It might be tempting to use a tag beacuse of its visual presentation on the browser but wehn using heading tags take special care of the semantic meaning.
+
+Semantic meaning means that the tag you use around your content should indicate the information is includes. For instance according to HTML5 standards each web page should have a single h1 tag this tag is used as the main subject for your content.So an html page should have the proper hierarchy of heading tags a proper structure when writing up content using heading tags would look as follows, take note of the precendence order of the heading tags:
+
+	<h1> Title</h1>
+	<h2> Introduction</h2>
+		<h3>subsection</h3>
+			<h4>sub-subection</h4>
+
+	<h2>Body</2>
+		<h3>subsection</h3>
+			<h4>sub-subsection</h4>
+				<h5> another nested subsection</5>
+
+	<h2>Conclusion</h2>
+		
