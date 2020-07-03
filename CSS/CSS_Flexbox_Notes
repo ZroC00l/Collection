@@ -30,3 +30,14 @@ So far we have explored the flex property and its property values it offers, how
 	4.space-between:aligns items to the center of the main axis, with extra space placed between the items. The first and last items are pushed to the very edge of the flex container.
 	5.space-around:similar to space-between but the first and last items are not locked to the edges of the container, the space is distributed around all the items with a half space on either end of the flex container
 	6.space-evenly:Distributes space evenly between the flex items with a full space at either end of the flex container
+
+Another CSS property we can use to organize flex items inside of the flex container is the "align-items" property, take note align-items property is the same as the justify-content property , it also uses the following property values:
+	
+	1.flex-start
+	2.flex-end
+	3.center
+	4.stretch: this will cause the flex items to fill up the flex container
+	5.baseline:Baseline is a text concept, think of it as the line that the letters sit on.
+
+
+
