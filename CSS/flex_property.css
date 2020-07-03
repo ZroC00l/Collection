@@ -3,20 +3,25 @@ to position elements on the page*/
 #container-box{
     display: flex;
     height: 500px;
+    background-color:grey;
     flex-direction:row-reverse;
+
+    justify-content:center;
 }
 
 
 #box1{
-    width: 50%;
-    height:50%;
+
+    width: 25%;
+    height:100%;
     background-color: green;
 
 }
 
 #box2{
-    width:50%;
-    height:50%;
+
+    width:25%;
+    height:100%;
     background-color:red;
 
 }
