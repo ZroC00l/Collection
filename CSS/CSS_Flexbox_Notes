@@ -47,3 +47,7 @@ Flex-wrap uses the following wrap values:
 		1.nowrap: this is the default setting of the wrap property and it doesnt wrap any elements;
 		2.wrap: this wraps items from left-to-right if they are in a row or top-to-bottom if they are in a column
 		3.wrap-reverse:this wraps elements from right-to-left if they are in a row and from bottom-to-top if they are in a column.
+
+FLEX-SHRINK PROPERTY
+
+The flex-shrink property can be used to reduce the size of flex items inside the flex container if the size of the conatiner is not big enough to encapsulate the flex items, the higher the flex-shrink property value the more the item will shrink, e.g if we have  flex-shrink:1 and flex-shrink:3 then the element with the flex-shrink of 3 will shrink 3 times smaller than the element with the shrink factor of 1.

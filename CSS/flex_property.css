@@ -2,7 +2,7 @@
 to position elements on the page*/
 #container-box{
     display: flex;
-    height: 1000px;
+    height: 1000px;/* dont use % as measure of unit as it causes the entire flex container to disappear*/
     background-color:gray;
     display:flex;
 
