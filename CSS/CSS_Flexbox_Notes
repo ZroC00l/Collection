@@ -1,0 +1,20 @@
+INTRODUCTION TO CSS FLEXBOX
+A Website typically consists of two components:
+	1.Visual elements= this refers to the images, color and font elements
+	2.positioning elements= this are the elements used in placing the visual elements
+
+Flexbox is a new CSS feature only supported among the modern popular browsers. Flexbox is a layout container of some sort used for Dynamic User Interfaces.Flexbox arrranges the UI elements in such a way that the layout is represented well across the various devices and browsers used to access the content.
+
+WORKING WITH THE DISPLAY PROPERTY
+
+We have seen the display property used before when we did the CSS basics , it consisted of the inline property value used to manipulate the inline style of nav's list items. We go deeper into the display property by having a look at one of its property values called flex.
+Adding a "display:flex" CSS property to an element allows you to have access to other flex properties to be able to build a responsive page.
+
+Adding the CSS display:flex property turns the element on which its applied on to a flex container. This makes it possible to align children of the element in rows or columns using the "flex-direction" CSS property. The flex-direction property uses 4 property values:
+	
+	1.row= this is the default value of the property
+	2.column
+	3.row-reverse
+	4.column reverse
+
+using the CSS flex property for instance we would have a parent div container encapsulating 2 or more child div elements then for the styling property the parent container will be the only property that contains the "dispaly:flex and flex-direction" CSS properties.Its child elements will inherit whatever flex-direction property value is used if it row, then the child elements will be arranged in a row and if its a column,row-reverse or column-reverse then they will be arranged accordingly.

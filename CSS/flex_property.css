@@ -1,0 +1,22 @@
+/*This Stylesheet illustrates how we can work with the flex property
+to position elements on the page*/
+#container-box{
+    display: flex;
+    height: 500px;
+    flex-direction:row-reverse;
+}
+
+
+#box1{
+    width: 50%;
+    height:50%;
+    background-color: green;
+
+}
+
+#box2{
+    width:50%;
+    height:50%;
+    background-color:red;
+
+}
