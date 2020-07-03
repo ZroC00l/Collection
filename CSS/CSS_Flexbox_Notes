@@ -48,6 +48,13 @@ Flex-wrap uses the following wrap values:
 		2.wrap: this wraps items from left-to-right if they are in a row or top-to-bottom if they are in a column
 		3.wrap-reverse:this wraps elements from right-to-left if they are in a row and from bottom-to-top if they are in a column.
 
-FLEX-SHRINK PROPERTY
+FLEX-SHRINK , FLEX-BASIS AND FLEX-GROW PROPERTY
 
-The flex-shrink property can be used to reduce the size of flex items inside the flex container if the size of the conatiner is not big enough to encapsulate the flex items, the higher the flex-shrink property value the more the item will shrink, e.g if we have  flex-shrink:1 and flex-shrink:3 then the element with the flex-shrink of 3 will shrink 3 times smaller than the element with the shrink factor of 1.
+The flex-shrink property can be used to reduce the size of flex items inside the flex container if the size of the conatiner is not big enough to encapsulate the flex items, the higher the flex-shrink property value the more the item will shrink, e.g if we have  flex-shrink:1 and flex-shrink:3 then the element with the flex-shrink of 3 will shrink 3 times smaller than the element with the shrink factor of 1.The Flex-grow property is the opposite of the flex-shrink property.The Flex-basis property represents the initial size of the flex item before being manipulated using the flex shrink and flex grow properties, the unit of measure that the flex basis property uses are(%,em or px).There is a shorthand notation form to state the flex properties all in one line.For example, flex: 1 0 10px; will set the item to flex-grow: 1;, flex-shrink: 0;, and flex-basis: 10px;.
+
+USING THE ORDER PROPERTY
+
+We can use the "order" property to order the flex items inside the container. The order property value uses integers from 0 to change the normal order in which the flex items appear as in the html.
+
+USING THE ALIGN-SELF PROPERTY
+The final property for flex items is align-self. This property allows you to adjust each item's alignment individually, instead of setting them all at once. This is useful since other common adjustment techniques using the CSS properties float, clear, and vertical-align do not work on flex items.
