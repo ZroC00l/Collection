@@ -20,3 +20,13 @@ Adding the CSS display:flex property turns the element on which its applied on t
 using the CSS flex property for instance we would have a parent div container encapsulating 2 or more child div elements then for the styling property the parent container will be the only property that contains the "dispaly:flex and flex-direction" CSS properties.Its child elements will inherit whatever flex-direction property value is used if it row, then the child elements will be arranged in a row and if its a column,row-reverse or column-reverse then they will be arranged accordingly.
 
 To understand the flex properties properly we look at a tweet embed that uses just html , you task will be to create a tweet embed that uses CSS display flex properties to emulate a real tweet embed.
+
+WORKING WITH THE JUSTIFY-CONTENT PROPERTY
+
+So far we have explored the flex property and its property values it offers, however there are certain points when developing your page , where you want to organise the flex items in the flex container to suit your needs."Justify-Content" CSS property provides us with the ability to structure flex items within the flex container to meet our visual needs. This property has the following values it can take:
+	1.center: this will position the flex items to the middle of the page;
+	2.flex-start: this aligns flex items to the start of the container.Take note if its a row it aligns the flex items from the left of the container, and if its a column it aligns the flex items to top of the container.
+	3.flex-end: this aligns items to the end of the container. If its a row it aligns the flex items to the right of the container and if its a column it aligns the items to the bottom.
+	4.space-between:aligns items to the center of the main axis, with extra space placed between the items. The first and last items are pushed to the very edge of the flex container.
+	5.space-around:similar to space-between but the first and last items are not locked to the edges of the container, the space is distributed around all the items with a half space on either end of the flex container
+	6.space-evenly:Distributes space evenly between the flex items with a full space at either end of the flex container
