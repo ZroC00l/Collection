@@ -40,4 +40,10 @@ Another CSS property we can use to organize flex items inside of the flex contai
 	5.baseline:Baseline is a text concept, think of it as the line that the letters sit on.
 
 
-
+FLEX-WRAP PROPERTY
+CSS flexbox feature provides us with another property which can be used to manipulate flex items inside a container.Flex-wrap has the ability to split a flex item into multiple rows or columns, this ofcourse depends on the size of the container and flex items.
+Flex-wrap uses the following wrap values:
+		
+		1.nowrap: this is the default setting of the wrap property and it doesnt wrap any elements;
+		2.wrap: this wraps items from left-to-right if they are in a row or top-to-bottom if they are in a column
+		3.wrap-reverse:this wraps elements from right-to-left if they are in a row and from bottom-to-top if they are in a column.
