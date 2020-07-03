@@ -18,3 +18,5 @@ Adding the CSS display:flex property turns the element on which its applied on t
 	4.column reverse
 
 using the CSS flex property for instance we would have a parent div container encapsulating 2 or more child div elements then for the styling property the parent container will be the only property that contains the "dispaly:flex and flex-direction" CSS properties.Its child elements will inherit whatever flex-direction property value is used if it row, then the child elements will be arranged in a row and if its a column,row-reverse or column-reverse then they will be arranged accordingly.
+
+To understand the flex properties properly we look at a tweet embed that uses just html , you task will be to create a tweet embed that uses CSS display flex properties to emulate a real tweet embed.

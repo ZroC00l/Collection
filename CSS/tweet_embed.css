@@ -1,0 +1,73 @@
+/*This stylesheet illustrates the styling used in creating a real
+live version of a tweet embed*/
+
+body{
+    font-family: Arial, sans-serif;
+}
+
+header, foooter{
+    display:flex;
+    flex-direction:column;
+}
+
+header .profile_picture{
+    width:50px;
+    height:50px;
+    border-radius:4px;
+}
+
+header .profile_name{
+    margin-left:10px;
+    display:flex;
+    flex-direction: column;
+}
+
+header .follow_button{
+    display:flex;
+    margin: 0 0 0 auto;
+}
+
+header .follow_button button{
+    border:0; /*removes the border around the element making it appear smooth*/
+    padding: 5px;
+    border-radius:3px;
+}
+
+header h3, header h4{
+    margin: 0;
+    display:flex;
+}
+
+#tweet_area p{
+    margin-bottom:10px;
+    font-size: 20px;
+    text-align:left;
+}
+
+#tweet_area hr{
+    margin: 20px 0;
+    border-style:solid;
+    opacity:0.1;
+}
+
+footer .stats{
+    display:flex;
+    font-size:15px;
+}
+
+footer .stats strong{
+    font-size:18px;
+}
+
+footer .stats .Likes{
+    margin-left:10px;
+}
+
+footer .the_buttons{
+    margin-left:auto;
+
+}
+footer .the_buttons button{
+    border:0;
+    background:transparent;
+}
