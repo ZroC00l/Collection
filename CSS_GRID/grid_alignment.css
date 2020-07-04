@@ -1,0 +1,35 @@
+/*This stylesheet illustrates the css grid alignment properties
+  for modifying sizes of rows and column container elements*/
+
+.grid_container{
+    background:black;
+    min-height:300px;
+    width:100%;
+
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr;
+}
+
+/* Use justify-self to center .box1 ,then align box2 and 4 to the left then align box 3 and 5 to
+the right and side*/
+.box1{
+    background:magenta;
+    justify-self:center;
+}
+.box2{
+    background:green;
+    justify-self:start;
+}
+.box3{
+    background:pink;
+    justify-self:end;
+}
+.box4{
+    background:yellow;
+    justify-self:start;
+}
+.box5{
+    background:cyan;
+    justify-self:end;
+}

@@ -70,5 +70,11 @@ The following is an example of creating a row in a 3X3 grid that takes the last 
 container.
 
     grid-row:2/4;
-
+WORKING WITH JUSTIFY-SELF PROPERTY
+CSS provides us with another grid property used for aligning content of a cell. This property uses 4
+parameter values to align the content inside the cell, these parameter values consist of:
+    1.stretch: this is the default value of the property and it fills the entire width of the cell.
+    2.start:this property value aligns the content to the left of the cell.
+    3.center:this property value aligns the content to the center of the cell.
+    4.end:this property value aligns the content to the right of the cell.
 
