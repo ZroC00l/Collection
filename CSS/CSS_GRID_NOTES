@@ -54,16 +54,21 @@ By default if "grid-gap" has only one parameter value, then that value will repr
 in between the rows and columns. If the grid-gap property has two parameters the first one represents the
 row spacing and the second the column spacing.
 
-WORKING WITH GRID-COLUMN
+WORKING WITH GRID-COLUMN and GRID-ROW PROPERTIES
 So far we have been working with the grid containers only and not with the items themselves.
 "grid-column" is a CSS property that provides us with the ability to control the amount of columns an
 item will consume. The grid consists of vertical and horizontal lines each numbered from the top left
 hand corner of the grid, counting horizontally and vertically, these lines we use them to control the
-line spacing between the columns.
+line spacing between the columns."grid-row" is yer another grid property that allows us to manipulate
+the line spacing between our rows , it works just like grid-column except it consumes the rows.
 
 The following is an example of creating a column in a 3X3 grid that takes the last two columns of the
 second row .
 
     grid-column: 2/4;
+The following is an example of creating a row in a 3X3 grid that takes the last 2 rows of the grid
+container.
+
+    grid-row:2/4;
 
 
