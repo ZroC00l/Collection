@@ -1,0 +1,40 @@
+/*This stylesheet illustrates the css grid properties
+  for modifying sizes of rows and column container elements*/
+
+.grid_container{
+    background:black;
+    width:100%;
+    min-height: 300px;
+    font-size: 30px;
+
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    grid-gap: 10px;
+
+
+}
+
+.box1{
+    background: cyan;
+    /*The property below will cause the box 1 container to consume all the columns
+    starting from line 1 to line 4 since this is a 3X3 container*/
+    grid-column:1/4;
+}
+
+.box2{
+    background: magenta;
+}
+
+.box3{
+    background: PaleGreen;
+}
+.box4{
+    background: pink;
+}
+
+.box5{
+    background: purple;
+}
+
