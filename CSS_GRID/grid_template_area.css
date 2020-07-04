@@ -1,0 +1,42 @@
+/*This stylesheet illustrates the css grid-template-areas
+  property and how it is applied to element items*/
+
+.grid_container{
+    background:black;
+    width:100%;
+    min-height:300px;
+
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows:1fr 1fr 1fr;
+
+    grip-gap: 10px;
+
+    grid-template-areas:
+        "header header header"
+        "advert content content"
+        "footer footer footer";
+
+}
+
+.box1{
+    background: green;
+    /*this grid-area below will group all of row1's cells into one area using the header
+       custom name*/
+    grid-area:header;
+}
+.box2{
+    background: cyan;
+}
+.box3{
+    background: orange;
+}
+.box4{
+    background:magenta;
+}
+.box5{
+    background: pink;
+    /*using grid-template-area we can group all cells into one area using either of the custom
+    name areas in out template-areas property, this item uses the footer to achieve this.*/
+    grid-area:footer;
+}
