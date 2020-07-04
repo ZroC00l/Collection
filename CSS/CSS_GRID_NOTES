@@ -108,3 +108,53 @@ properties. So to add an item to your template-area's custom area, you will need
 property inside your item's styling properties and give it the name of the custom area where you'd
 like the item to be applied.
 
+We can use the grid-area property without having to define our grid-template-area property. what happens
+is that the grid-area property will create the template area on the fly.
+The following is short hand notation of grid-area creating a template on the fly inside an item.
+
+    .box1{
+        grid-area: 1/1/2/4
+    }
+The numbers used in the above notation each represents the line margins of the grid container.
+
+        grid-area: horizontal_line_to_start_At/vertical_line_to_start_At/
+                    horizontal_line_to_end_At/vertical_line_to_end_At
+
+So the above will join cells horizontally starting a line 1 to line 2 and then join cells
+vertically starting a line 1 to line 4
+
+WORKING WITH THE REPEAT FUNCTION
+There are times when you want to replicate the columns or rows of your grid container, for
+example say you need a grid with a 100 rows of the same height, its not very practical to insert
+100 values individually. So we use the "repeat" function to help us with adding replication or
+removing repetition.
+
+Here's an example that would create the 100 row grid, each row at 50px tall:
+
+    grid-template-rows: repeat(100, 50px);
+You can also repeat multiple values with the repeat function and insert the function amongst
+other values when defining a grid structure. Here's what that looks like:
+
+    grid-template-columns: repeat(2, 1fr 50px) 20px;
+This translates to:
+
+    grid-template-columns: 1fr 50px 1fr 50px 20px;
+
+WORKING WITH THE MIN-MAX PROPERTY
+The min-max property can be used to set the size limit of the items when the grid container
+changes size. It can be used in conjunction with the repeat function.
+The following is an example of working with the min-max property:
+
+    grid-template-columns: 100px minmax(90px,250px);
+
+ The syntax above will create two columns the first one will have a width of a 100px, the second
+ column should have a minimum width of 90px and a maximum width of 250px.
+
+ CREATE FLEXIBLE LAYOUTS WITH THE AUTOFILL PROPERTY
+The repeat function comes with an option called auto-fill.This allows you to automatically insert as m
+any rows or columns of your desired size as possible depending on the size of the container.
+You can create flexible layouts when combining auto-fill with min-max, like this:
+
+    grid-template-columns:repeat(autofill,minmax(60px,1fr));
+When the container changes size, this setup keeps inserting 60px columns and stretching them until
+it can insert another one.
