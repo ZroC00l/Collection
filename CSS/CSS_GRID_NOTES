@@ -167,3 +167,9 @@ stretches your items to fit the size of the container.
 USING MEDIA QUERIES TO CREATE A RESPONSIVE LAYOUT
 CSS Grid can be an easy way to make your site more responsive by using media queries to rearrange
 grid areas, change dimensions of a grid, and rearrange the placement of items.
+
+CREATING GRIDS WITHIN A GRID
+Turning an element into a grid only affects the behavior of its direct descendants.
+So by turning a direct descendant into a grid, you have a grid within a grid.
+For example, by setting the display and grid-template-columns properties of the element
+with the item3 class, you create a grid within your grid.

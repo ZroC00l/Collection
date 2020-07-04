@@ -1,0 +1,40 @@
+/*This stylesheet illustrates using CSS grid and divs to
+create a grid within a grid*/
+
+.grid_container{
+    background: black;
+    width:100%;
+    min-height:300px;
+    font-size:40px;
+
+    display:grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-gap:10px;
+    grid-template-areas:
+        "advert header"
+        "advert content"
+        "advert footer";
+}
+.box1{
+    background:cyan;
+    grid-area:header;
+}
+.box2{
+    background:pink;
+    grid-area:advert;
+}
+.box3{
+    background:magenta;
+    grid-gap:content;
+}
+.box4{
+    background:green;
+    grid-area:footer;
+}
+.content1{
+    background:blue;
+}
+.content2{
+    background:purple;
+}
