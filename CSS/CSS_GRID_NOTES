@@ -88,5 +88,23 @@ When we need all the grid items to be uniformly aligned in a vertical manner we
 enlist the help of another property called "align-self",this property uses the same property
 values as "justify-self" property and "align-self" property.
 
+DIVIDING A GRID INTO A TEMPLATE AREA
+CSS provides us with a property we can use to group our cells into a single area with a custom name.
+This property is called the "grid-template-areas". The following is a example of using the property:
 
+    grid-template-areas:
+      "header header header"
+      "advert content content"
+      "footer footer footer";
+Each word in the above syntax represents a cell and every pair of quotation represents a row.
+The above syntax groups all the cells into a single row template area with a custom name of header.
+The last row also groups the cells into a single template area with the custom name of footer.
+The middle row is divided into 2 template are one for advert and one for content.In addition to
+custom labels, you can use a period (.) to designate an empty cell in the grid.
+
+After creating your template area, you will now use the "grid-area" property to add a item to the
+custom area. Remember the "grid-template-areas" property goes inside your grid containers' styling
+properties. So to add an item to your template-area's custom area, you will need to put "grid-area"
+property inside your item's styling properties and give it the name of the custom area where you'd
+like the item to be applied.
 
