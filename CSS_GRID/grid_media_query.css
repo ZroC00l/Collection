@@ -1,0 +1,60 @@
+/*This stylesheet illustrates how to use media queries to
+rearrange the grid's areas as well as make the page
+responsive*/
+.grid_container{
+    background: black;
+    width: 100%;
+    min-height: 300px;
+    font-size:1.5em;
+
+    display:grid;
+    grid-template-columns:1fr;
+    grid-template-rows: 50px auto 1fr auto;
+    grid-gap:10px;
+    grid-template-areas:
+        "header"
+        "advert"
+        "content"
+        "footer";
+}
+
+.box1{
+    background:cyan;
+    grid-area:header;
+}
+.box2{
+    background:magenta;
+}
+.box3{
+    background:orange;
+}
+.box4{
+    background:green;
+    grid-area:footer;
+}
+
+/*Defining the media queries*/
+@media (min-width:300px){
+    .grid_container{
+        grid-template-columns:auto 1fr ;
+        grid-template-rows:auto 1fr ;
+
+        grid-template-areas:
+            "advert header"
+            "advert content"
+            "advert footer";
+    }
+}
+
+@media (min-width:400px){
+    .grid_container{
+        grid-template-columns: ;
+        grid-template-rows: ;
+
+        grid-template-areas:
+            "header header"
+            "advert content"
+            "footer footer";
+
+    }
+}

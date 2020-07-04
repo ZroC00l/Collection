@@ -150,11 +150,20 @@ The following is an example of working with the min-max property:
  The syntax above will create two columns the first one will have a width of a 100px, the second
  column should have a minimum width of 90px and a maximum width of 250px.
 
- CREATE FLEXIBLE LAYOUTS WITH THE AUTOFILL PROPERTY
+ CREATE FLEXIBLE LAYOUTS WITH THE AUTO-FILL and AUTO-FIT PROPERTY
 The repeat function comes with an option called auto-fill.This allows you to automatically insert as m
 any rows or columns of your desired size as possible depending on the size of the container.
 You can create flexible layouts when combining auto-fill with min-max, like this:
 
-    grid-template-columns:repeat(autofill,minmax(60px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(60px,1fr));
 When the container changes size, this setup keeps inserting 60px columns and stretching them until
 it can insert another one.
+
+Auto-fit works almost identically to auto-fill. The only difference is that when the container's
+size exceeds the size of all the items combined, auto-fill keeps inserting empty rows or columns
+and pushes your items to the side, while auto-fit collapses those empty rows or columns and
+stretches your items to fit the size of the container.
+
+USING MEDIA QUERIES TO CREATE A RESPONSIVE LAYOUT
+CSS Grid can be an easy way to make your site more responsive by using media queries to rearrange
+grid areas, change dimensions of a grid, and rearrange the placement of items.
