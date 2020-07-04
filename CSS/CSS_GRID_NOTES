@@ -80,10 +80,13 @@ parameter values to align the content inside the cell, these parameter values co
 Just as you can align an item horizontally, there's a way to align an item vertically as well. To do this, you use the align-self property
 on an item. This property accepts all of the same values as justify-self from the last challenge.
 
-WORKING WITH THE JUSTIFY-ITEMS PROPERTY
+WORKING WITH THE JUSTIFY-ITEMS and ALIGN-ITEMS PROPERTY
 
-Sometimes we need all the grid items to be uniformly aligned , one such property that can provide us with this capability
+Sometimes we need all the grid items to be uniformly aligned in a horizontal manner, one such property that can provide us with this capability
 is the "justify-self" property it uses the same property values as the "justify-self" and "align-self" properties.
+When we need all the grid items to be uniformly aligned in a vertical manner we
+enlist the help of another property called "align-self",this property uses the same property
+values as "justify-self" property and "align-self" property.
 
 
 
