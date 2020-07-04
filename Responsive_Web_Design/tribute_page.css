@@ -1,0 +1,51 @@
+
+#main{
+  background:lightgray;
+  width:100%;
+
+
+}
+#title{
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:5px;
+    font-family: 'Lobster',cursive;
+
+}
+#img-div{
+  background:white;
+  border-radius:10px;
+  width:98%;
+  padding-bottom: 1px;
+  padding-top:20px;
+  margin-left:12px;
+
+
+}
+#img-div img{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  width:20%;
+  border-radius:50%;
+}
+figcaption{
+   text-align:center;
+}
+
+h4{
+  text-align:center;
+}
+ul{
+  text-align:center;
+  line-height:35px;
+}
+
+ul li{
+  display:block;
+}
+
+p{
+  text-align:center;
+  font-style:italic;
+}
