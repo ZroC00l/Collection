@@ -1,0 +1,42 @@
+/*This stylesheet illustrates the css grid properties
+for modifying sizes of rows and column container elements*/
+
+.grid_container{
+    background: gray;
+    width: 100%;
+    display: grid;
+   /* creates 3 columns of 100px width*/
+     /*Uncomment to see how it behaves*/
+    /*grid-template-columns: 100px 100px 100px;*/
+    /* this property below sets the width sizes of the first 3 columns to auto,100px and 100%
+    respectively*/
+    grid-template-columns: auto 100px 100% ;
+
+    /*The property below work hand in hand with the
+    grid-template-column property to modify the sizes
+    in between the set columns, so this will create a
+    space of 10px between the columns*/
+    grid-column-gap: 10px
+
+
+}
+
+.box1{
+    background: green;
+}
+
+.box2{
+    background: cyan;
+}
+
+.box3{
+    background: yellow;
+}
+
+.box4{
+    background: red;
+}
+
+.box5{
+    background: blue;
+}

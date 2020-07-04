@@ -22,7 +22,32 @@ defining a grid container with 3 columns. Note each column has been set to 100px
             display:grid;
             grid-template-columns:100px 100px 100px;
         }
+In addition to the grid-template-columns we also has the "grid-template-rows" which is used to define
+the structure in a series of rows , like its counter part each property value represents a column and its
+width.
+GRID UNITS OF MEASURE
+CSS grid provides us with units of measure we can use to adjust the sizes of the columns and rows.
+They use either absolute or relative measures of unit.There following are measures of unit used in
+modification of the column and row sizes:
+    1.fr: sets the column or with to the fraction of the available space.
+    2.auto: sets the column or row to fit the size of its content automatically.
+    3.%: sets the column or row to a percent width of its container.
 
+ The following is an example of creating a column 5 columns each with its specified size:
+
+    grid-template-columns: auto 1fr 2fr 50px 50% auto;
+
+-auto represents the first column and that column's size will be set to fit its content automatically
+-1fr sets the second column to the specified fraction of the available space
+-2fr sets the second column to the specified fraction of the available space
+-50px sets the third column to a size of 50 pixels.
+-50% sets the fourth column to 50 percent width of its container.
+-auto sets the fifth column to automatically fit its content that its wrapped around.
+
+GRID-ROW-GAP AND GRID-COLUMN-GAP PROPERTIES
+
+we can create a space in between our columns through the use of the column-gap property, it uses px as
+the measure of unit, the same applies for column-row when adding a gap.
 
 
 
