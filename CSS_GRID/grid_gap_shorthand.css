@@ -1,0 +1,28 @@
+/*This stylesheet illustrates the css grid properties
+for modifying sizes of rows and column container elements*/
+.grid_container{
+    background: black;
+    width:100%;
+    display:grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    /* the row gap will be set to 10px and column set to 20px;*/
+    grid-gap: 10px 20px;
+}
+.box1{
+    background: rgb(204, 255, 51);
+}
+.box2{
+    background: hsl(300, 100%, 50%);
+}
+.box3{
+    background: cyan;
+}
+.box4{
+    background: magenta;
+}
+.box5{
+    background: lime;
+}

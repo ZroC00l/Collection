@@ -49,5 +49,10 @@ GRID-ROW-GAP AND GRID-COLUMN-GAP PROPERTIES
 we can create a space in between our columns through the use of the column-gap property, it uses px as
 the measure of unit, the same applies for column-row when adding a gap.
 
+We can also use the "grid-gap" which is a shorthand format for specifying grid-column-gap and grid-column-row.
+By default if "grid-gap" has only one parameter value, then that value will represent the space created
+in between the rows and columns. If the grid-gap property has two parameters the first one represents the
+row spacing and the second the column spacing.
+
 
 
