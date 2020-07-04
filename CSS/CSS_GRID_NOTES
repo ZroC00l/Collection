@@ -1,0 +1,28 @@
+INTRODUCTION TO CSS GRID
+CSS grid helps you to easily build complex web designs. IT works by turning an HTML element into
+a grid container with rows and columns , were you can place your child elements wherever you want
+within the container.
+
+CREATING YOUR FIRST CSS GRID
+To create your first css grid your you need to add the "display: grid" CSS property.Which means the
+HTML element you wish you convert into a grid container should have the CSS "display:grid" style of
+format.
+
+ADD COLUMNS WITH GRID-TEMPLATE-COLUMNS
+Simply adding the "display:grid" CSS property to an HTML element wont change anything that much.Y
+You need to define the structure of the grid as well. We do so by enlisting the help of another CSS
+property called "grid-template-columns".
+
+This property works by adding columns to the grid container. Each parameter value of the property
+represents a column and the actual number is the width of that column.The following is syntax for
+defining a grid container with 3 columns. Note each column has been set to 100px width, each of the
+100px represents a column.
+    <style>
+        .container{
+            display:grid;
+            grid-template-columns:100px 100px 100px;
+        }
+
+
+
+

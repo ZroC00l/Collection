@@ -1,0 +1,39 @@
+/*This stylesheet contains the CSS properties used
+in creating a container grid with 3 columns*/
+
+.grid_container{
+    background: gray;
+    width: 100%;
+    font-size:40px;
+    display:grid;
+    /*This creates 3 columns each with a width of 50px*/
+    grid-template-columns:100px 100px 100px;
+}
+
+.box1{
+    background: green;
+
+}
+
+.box2{
+    background: pink;
+
+}
+
+.box3{
+    background: purple;
+
+}
+
+.box4{
+    background: orange;
+
+
+}
+
+.box5{
+    background: black;
+
+
+}
+
