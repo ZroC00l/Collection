@@ -35,14 +35,14 @@ figcaption{
 
 h4{
   text-align:center;
-}
-ul{
-  text-align:center;
-  line-height:35px;
+  margin-right: 40px;
+
 }
 
-ul li{
-  display:block;
+
+ul {
+  display:table;
+  margin:0 auto;
 }
 
 p{
