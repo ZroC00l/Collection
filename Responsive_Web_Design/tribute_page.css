@@ -15,7 +15,8 @@
 #img-div{
   background:white;
   border-radius:10px;
-  width:98%;
+  max-width:98%;
+  height:auto;
   padding-bottom: 1px;
   padding-top:20px;
   margin-left:12px;
@@ -26,7 +27,8 @@
   display:block;
   margin-left:auto;
   margin-right:auto;
-  width:20%;
+  max-width:100%;
+  height:auto;
   border-radius:50%;
 }
 figcaption{
@@ -39,7 +41,7 @@ h4{
 
 }
 
-
+/*This will put the unordered list in the middle*/
 ul {
   display:table;
   margin:0 auto;
