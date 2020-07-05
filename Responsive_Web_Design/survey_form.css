@@ -1,0 +1,9 @@
+select{
+    color: #ccc;
+}
+option{
+    color: #000;
+}
+option:first-child{
+    color: #ccc;
+}
