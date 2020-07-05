@@ -7,3 +7,64 @@ option{
 option:first-child{
     color: #ccc;
 }
+
+body{
+    background-image:url("../images/anime.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+#form_container{
+    background:rgb(0, 230, 153,0.6);
+    max-width:100%;
+    height:auto;
+    margin-left:200px;
+    margin-right:200px;
+    border-radius: 20px;
+}
+
+#title{
+    text-align:center;
+    font-family:'Permanent Marker',cursive;
+    color:#00e699;
+}
+
+#description{
+    text-align:center;
+    color:white;
+    font-family:'Roboto',sans-serif;
+    font-style:italic;
+}
+
+#survey-form{
+    display:table;
+    margin: auto;
+    color:white;
+    font-family:'Roboto',sans-serif;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+label{
+    margin-left:70px;
+}
+input{
+    margin-left:10px;
+}
+select{
+
+    margin-left:10px;
+}
+#name{
+    margin-bottom:10px;
+}
+#email{
+    margin-bottom:10px;
+}
+#number{
+    margin-bottom:10px;
+}
+#submit{
+    margin-left:40%;
+    margin-top:5%;
+}
