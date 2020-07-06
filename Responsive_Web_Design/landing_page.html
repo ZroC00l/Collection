@@ -3,28 +3,106 @@
 <head>
     <title>Landing_Page</title>
     <link rel="stylesheet" type="text/css" href="landing_page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
 </head>
 <body>
     <header id="header">
-        <img id="header-img src="../logos/ alt="header logo">
+        <img id="header-img" src="../logos/logo.png" alt="header logo">
         <nav id="nav-bar">
             <ul>
-                <li><a href="" alt="" class="nav-link"></a></li>
-                <li><a href="" alt="" class="nav-link"></a></li>
-                <li><a href="" alt="" class="nav-link"></a></li>
+                <li><a href="#genre_container" alt="Genre Content" class="nav-link">Genres</a></li>
+                <li><a href="" alt="" class="nav-link">About</a></li>
+                <li><a href="#footer" alt="Contact-Details" class="nav-link">Contact</a></li>
             </ul>
         </nav>
     </header>
 
+    <hr>
+
+    <h1 style="text-align:center">Experience the best entertainment the anime verse has to offer</h1>
+
     <form id="form" action=" https://www.freecodecamp.com/email-submit">
-        <input type="email" id="email" placeholder="E-mail">
+        <input type="email" id="email" placeholder="Enter your email address">
 
         <input type="submit" id="submit">
     </form>
     <div id="grid_container">
-        <div class="box1">box1</div>
-        <div class="box2">box2</div>
-        <div class="box3">box3</div>
-    </div>
+
+        <div id="box1">
+            <h3>Shonen</h3>
+
+            <div class="frame_container1">
+
+
+                <iframe class="frame1" src="https://www.youtube.com/embed/KnxU5wfwFsY"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+
+                </iframe>
+
+            </div>
+
+        </div>
+        <div id="box2">
+            <h3>Shoujo</h3>
+            <div class="frame_container2">
+                <iframe class="frame2" src="https://www.youtube.com/embed/kVDqRG0qbBs"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+
+                </iframe>
+
+            </div>
+        </div>
+        <div id="box3">
+            <h3>Seinen</h3>
+            <div class="frame_container3">
+                <iframe class="frame3   " src="https://www.youtube.com/embed/v-AGjx0N24U"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+
+                </iframe>
+            </div>
+
+        </div>
+
+        <div id="genre_container">
+
+            <div class="b1"><h2>The Shonen World</h2>
+                <p class="content">
+                    Shonen manga is typically characterized by high-action,often humorous plots featuring male protagonists.
+                    Commonly-found themes in shonen manga include martial arts, robots, science fiction, sports, horror or mythological creatures.
+                    The camaraderie between boys or men on sports teams, fighting squads, and the like are often emphasized.
+                    Protagonists of such manga often feature an ongoing desire to better themselves,and often face challenges to their abilities, skills
+                    and maturity, where self-perfection, austere self-discipline, sacrifice in the cause of duty and honorable service to society, community, family
+                    and friends are stressed.
+                </p>
+
+            </div>
+            <div class="b2"><h2>The Shoujo World</h2>
+                <p class="content">
+                    Shojo manga covers many subjects in a variety of narrative styles, from historical drama to science fiction, often with a focus
+                    on romantic relationships or emotions.Shoujo anime will typically feature romance as part of the main storyline.
+                    There are an endless number of shoujo anime and manga on the market revolving around high school romances. The romances in shoujo anime tend to be more idealistic in nature with themes like "love at first sight" or "love has always been at your side."
+                    While I hate to make it sound negative, I would rather describe it as the fantasy romance that many girls dream of.
+                </p>
+
+            </div>
+            <div class="b3"><h2>The Seinen World</h2>
+                <p class="content">
+                    Seinen anime and manga tend to be a little bit more mature than it&#39s counterpart, Shounen, which is aimed at younger boys.
+                    This can be in Manga where a trademark of Seinen material is the use of Kanji in the writing. This is in contrast to Shounen Manga which have Furigana (A type of reading aid) adjacent to the Kanji, to help younger readers who have not advanced so far in their study of Kanji.
+                    Seinen has a number of signifiers, but you can generally tell it apart from Shounen as Seinen series either have a more complex plot, more mature themes and content or have an older main character. Seinen series are also much more cynical and pragmatic in their approach to conflict.
+                    It’s also more likely that the conflict in a Seinen series might deal with more shades of gray, rather than black and white and good against evil.
+                </p>
+            </div>
+
+        </div>
+
+        <footer id="footer">
+            <p id="footer_information">&copy Anime World 2020</p>
+            <p id="footer_contact">Contact:Tel (012) 762 2893 / mobile (076) 233 6789</p>
+            <p id="footer_email">E-mail: animeworld@gmail.co.za</p>
+        </footer>
 </body>
 </html>

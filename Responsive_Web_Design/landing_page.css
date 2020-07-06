@@ -4,64 +4,282 @@
 		font-size:10px;
 	}
 
+
 }
+
 header{
     top:0;
     left:0;
     width:100%;
-    background:green;
+    background:transparent;
     color:white;
-    padding-top:20px;
+    padding-top:1px;
+    border-radius:5px;
 
 }
-nav{
+.nav-link{
+     font-family: 'Luckiest Guy',cursive;
+}
 
+#header-img{
+    width: auto;
+    height: 100px;
+    margin-left: 2%;
+}
+body{
+    background-image:url('../images/background4.jpg');
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-color: rgb(255,255,255);
+
+
+}
+h3{
+
+    font-family:'Trade Winds',cursive;
+    font-size:20px;
+    text-align:center;
+}
+h2{
+    font-family:'Kaushan Script',cursive;
+    font-size:30px;
+
+}
+
+h1{
+    font-family:'Galada',cursive;
+    font-size:40px;
+
+}
+/* Video frame Position Properties*/
+/*-----------------------------------------------------------------------*/
+.frame_container1{
+
+   position:relative;
+   padding-bottom:56.25%;
+   height:0;
+
+}
+
+.frame1{
+   position:absolute;
+   top:0;
+   left:0;
+   width:100%;
+   height:100%;
+}
+
+.frame_container2{
+
+   position:relative;
+   padding-bottom:56.25%;
+   height:0;
+
+}
+
+.frame2{
+   position:absolute;
+   top:0;
+   left:0;
+   width:100%;
+   height:100%;
+}
+
+.frame_container3{
+
+   position:relative;
+   padding-bottom:56.25%;
+   height:0;
+
+}
+
+.frame3{
+   position:absolute;
+   top:0;
+   left:0;
+   width:100%;
+   height:100%;
+}
+
+/*********************************************************************************************
+**********************************************************************************************/
+nav{
+    position:absolute;
     top:0;
     left:0;
-    width:100%;
+
+    width:70%;
     padding-top: 5px;
     padding-bottom:5px;
-    background:black;
+    background:transparent;
+    margin-left:10%;
+    margin-bottom:2%;
+    margin-top: 2.5%;
+
     color:white;
+    border-radius:5px;
+}
+
+ul li{
+    display:inline-block;
+    margin-right: 5%;
+}
+
+hr{
+    background-color:black;
+    margin-bottom: 3%;
+    height:5px;
+    border:none;
+}
+
+a{
+    color:black;
+    text-decoration:none;
 }
 input{
 
     display:table;
     margin:auto;
-    margin-top:10px;
+    margin-top:1%;
+
+
+}
+
+#email{
+    height: 30px;
+        width: 250px;
+
+}
+#submit{
+    height: 30px;
+    width: 100px;
 }
 
 
-ul li{
-    display:inline-block;
-}
+
 
 #grid_container{
-    background:black;
-    width: 100%;
-    height:auto;
-    margin-top:10px;
+    background:transparent;
+    width:auto;
+    height:100%;
+    margin-top:20px;
     padding-bottom:100px;
+    padding-top:20px;
 
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     justify-content:space-between;
 
 }
-.box1{
-    background:cyan;
-    padding-bottom: 150px;
-    padding-top:150px;
+#box1{
+    background:transparent;
+    width: 38%;
+    height:100%;
+    margin-left:2%;
+    margin-bottom:-2%;
+
+
+
+
 
 }
-.box2{
-    background:magenta;
-    padding-bottom: 150px;
-    padding-top:150px;
+#box2{
+    background:transparent;
+    width: 38%;
+    height:100%;
+    margin-left:4%;
+
+
 
 }
-.box3{
-    background:pink;
-    padding-bottom: 150px;
-    padding-top:150px;
+#box3{
+
+
+    background:transparent;
+     width: 38%;
+    height:100%;
+    margin-left:4%;
+    margin-right:2%;
+
+
+
+}
+
+
+#genre_container{
+    position:absolute;
+     background:transparent;
+     width:98%;
+     height:100%;
+     margin-top:400px;
+     padding-bottom:10px;
+
+     display:flex;
+     flex-direction:column;
+     justify-content:center;
+
+}
+
+.content{
+    font-size:18px;
+    line-height:25px;
+    text-align:justify;
+
+}
+
+.b1{
+     background:rgb(128,128,128,0.4);
+     width: 98%;
+     height:100%;
+     margin-top:2%;
+     margin-bottom:2%;
+     margin-left:1%;
+     margin-right:2%;
+     text-align:center;
+     border-radius:40px;
+
+}
+.b2{
+     background:rgb(128,128,128,0.4);
+     width: 98%;
+     height:100%;
+     margin-bottom:2%;
+     margin-left:1%;
+     margin-right:2%;
+     text-align:center;
+     border-radius:40px;
+}
+
+.b3{
+     background:rgb(128,128,128,0.4);
+     width: 98%;
+     height:100%;
+      margin-left:1%;
+      margin-right:2%;
+     text-align:center;
+     border-radius:40px;
+}
+
+
+footer{
+    position:absolute;
+    background:rgb(0,0,0,0.9);
+    max-width:auto;
+    padding-left:200px;
+    padding-right:200px;
+    padding-top:10px;
+    padding-bottom:10px;
+    margin-left:25%;
+    margin-top:89%;
+    border-radius:10px;
+
+
+}
+
+#footer_information, #footer_contact, #footer_email{
+     font-size:15px;
+     margin-top:1px;
+     color:white;
+     text-align:center;
 }
