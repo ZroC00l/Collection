@@ -1,0 +1,47 @@
+#navbar{
+    position:fixed;
+    background: #111;
+    height:100%;
+    width:210px;
+    position:fixed;
+    z-index:1;
+    top:0;
+    left:0;
+    overflow-x:hidden;
+    padding-top:20px;
+
+}
+
+#navbar a{
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+}
+
+#navbar a:hover{
+    color: #f1f1f1;
+}
+
+#navbar header{
+    background:cyan;
+    padding-top:20px;
+    padding-bottom:5px;
+}
+
+@media screen and (max-height: 450px) {
+  #navbar {padding-top: 15px;}
+  #navbar a {font-size: 18px;}
+}
+
+#main-doc{
+    margin-left:210px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+code{
+    background:lightgray;
+    border-radius:10px;
+
+}
