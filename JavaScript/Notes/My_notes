@@ -1,0 +1,216 @@
+Javascript is a high level programming language that makes up core of what the web is and how it
+functions.To understand the language you must know its syntax from its data types, variables to
+more complex components as in functions and objects.
+
+Javascript Variables
+
+To declare a variable in JavaScript you need to make use of the 'var' keyword followed by the
+name of the variable. A variable is the name we use to hold the data we will refer to later in
+our code when its time to use the data.
+
+    var my_var1;
+
+The above example is a typical illustration of how to declare a variable, take note that varibales
+in JavaScript can only contain numbers,letters and special characters like underscores and $.
+A variable name under no circumstances should ever begin with a number or a special character other
+than an underscore.
+
+JavaScript Data types
+
+JavaScript supports 8 different data types:
+    -boolean
+    -null
+    -string
+    -bigint
+    -undefined
+    -symbol
+    -number
+    -object
+
+Storing Values with the Assignment Operator
+
+We use the assignment operator(=) to store data into our variable.Take note the data to the right
+of the assignment operator is always resolved first before storing the data in the variable that is
+to the left of the assignment operator.Below is an example of assigning values to a variable.
+
+    var x;
+    var y=8;
+
+    x=2
+    y=x;
+Although y has its own value of 8, it is later overridden to the same value as x which is 2.
+In JavaScript a variable that is declared but has no value/data assigned to it is regarded as an
+undefined variable.If you perform an arithmetic operation on an undefined variable the answer will be
+"NaN" which means Not a Number. If you concatenate a string with an undefined variable then the result
+will be a literal string of "undefined".
+
+Understanding Case Sensitivity in Variables
+
+It is important to note that the way in which you write out your variable names is important.JavaScript
+is case sensitive which means you can have distinct variables but have them use the same words however the casing
+used makes them distinct:
+
+    var mY_VAR1;
+    var MY_vAr1;
+    var my_VaR1;
+
+The above variables all use the word "var1" but javascript interprets each differently because of casing used.
+So  we have 3 distinct variables each using a unique casing to differentiate it.To avoid this problem it is
+considered best JavaScript practice to use camelcase when defining you variable names:
+
+camelCase is a type of casing whereby we have a multiple word variable and the first word of the variable name
+is in lowercase and the subsequent word after that have each of their first letter capitalized and the rest of their
+letters in smallcase e.g:
+
+    var postalAddress;
+    var blockChainCommand;
+    var pointOfOrigin;
+
+Finding a Remainder in JavaScript
+The remainder operator % gives the remainder of the division of two numbers.
+    5 % 2 = 1 because
+    Math.floor(5 / 2) = 2 (Quotient)
+    2 * 2 = 4
+    5 - 4 = 1 (Remainder)
+Usage
+In mathematics, a number can be checked to be even or odd by
+checking the remainder of the division of the number by 2.
+The remainder operator is sometimes incorrectly referred to as the "modulus" operator.
+It is very similar to modulus, but does not work properly with negative numbers.
+
+Compound Assignment With Augmented Addition,subtraction,division and multiplication
+
+In programming, it is common to use assignments to modify the contents of a variable.
+Remember that everything to the right of the equals sign is evaluated first, so we can say:
+
+    myVar = myVar + 5;
+
+to add 5 to myVar. Since this is such a common pattern, there are operators which do both a
+mathematical operation and assignment in one step.
+
+One such operator is the += operator.as well as *=, /= , -=.
+
+Escaping Literal Quotes in Strings
+
+When you are defining a string you must start and end with a single or double quote. What happens when you need a literal quote: " or ' inside of your string?
+In JavaScript, you can escape a quote from considering it as an end of string quote by placing a backslash (\) in front of the quote.
+
+    var sampleStr = "Alan said, \"Peter is learning JavaScript\".";
+
+string values in JavaScript may be written with single or double quotes, as long as you start and end with the same type of quote
+unlike some other programming languages, single and double quotes work the same in JavaScript.
+    doubleQuoteStr = "This is a string";
+    singleQuoteStr = 'This is also a string';
+
+The reason why you might want to use one type of quote over the other is if you want to use both in a string. This might happen if you want to save a conversation in a string and have the conversation in quotes.
+Another use for it would be saving an <a> tag with various attributes in quotes, all within a string e.g.
+
+    var myStr = '<a href="http://www.example.com" target="_blank">Link</a>';
+
+However, this becomes a problem if you need to use the outermost quotes within it. Remember, a string has the same kind of quote at the beginning and end.
+But if you have that same quote somewhere in the middle, the string will stop early and throw an error.
+
+    goodStr = 'Jake asks Finn, "Hey, let\'s go on an adventure?"';
+    badStr = 'Finn responds, "Let's go!"'; // Throws an error
+
+Escape Sequences in Strings
+
+Escape sequence in strings help us to represent characters we may not want to write out within a string literal
+by using escape sequences to represent those character.The following are examples of common escape sequences used
+in JavaScript:
+    Code	Output
+    \'	single quote
+    \"	double quote
+    \\	backslash
+    \n	newline
+    \r	carriage return
+    \t	tab
+    \b	word boundary
+    \f	form feed
+To show how the escape sequences work take for example the string below:
+
+    var myString= "FirstSecondLineThirdLine";
+To make the string above appear similar to the string output below:
+
+    FirstLine
+        SecondLine
+    ThirdLine
+We need to use escape sequence characters, the following is an illustration of how we can achieve this:
+
+    var myString= "FirstLine \n \t SecondLine \n ThirdLine";
+
+Concatenating Strings with Plus Operator
+
+In JavaScript, when the + operator is used with a String value, it is called the concatenation operator.
+You can build a new string out of other strings by concatenating them together.
+
+We can also use the += operator to concatenate a string onto the end of an existing string variable.
+This can be very helpful to break a long string over several lines.
+
+    var ourStr = "I come first. ";
+    ourStr += "I come second.";
+
+Appending Variables to Strings
+
+Just as we can build a string over multiple lines out of string literals, we can also append variables to a string using the plus equals (+=) operator.
+Example:
+
+    var anAdjective = "awesome!";
+    var ourStr = "freeCodeCamp is ";
+    ourStr += anAdjective;
+
+Find the Length of a String
+
+You can find the length of a String value by writing .length after the string variable or string literal.
+
+        "Alan Peter".length; // 10
+
+For example, if we created a variable var firstName = "Charles", we could find out how long the string "Charles" is by using the firstName.length property
+
+Use Bracket Notation to Find the First Character in a String
+
+Most modern programming languages, like JavaScript, don't start counting at 1 like humans do.
+They start at 0. This is referred to as Zero-based indexing.
+Example:
+
+        var firstName = "Charles";
+        var firstLetter = firstName[0]; // firstLetter is "C"
+
+Understand String Immutability
+
+In JavaScript, String values are immutable, which means that they cannot be altered once created.
+For example, the following code:
+
+        var myStr = "Bob";
+        myStr[0] = "J";
+
+cannot change the value of myStr to "Job", because the contents of myStr cannot be altered.
+Note that this does not mean that myStr cannot be changed, just that the individual characters of a string literal cannot be changed.
+The only way to change myStr would be to assign it with a new string, like this:
+
+        var myStr = "Bob";
+        myStr = "Job";
+In short you cannot change a Javascript string literal by altering a portion of it , you will need to re-assign
+another string literal into the variable , so changing the whole string literal is the only way to alter it.
+
+Use Bracket Notation to Find the Nth Character in a String
+
+You can also use bracket notation to get the character at other positions within a string.
+Remember that computers start counting at 0, so the first character is actually the zeroth character.
+
+Use Bracket Notation to Find the Last Character in a String
+
+In order to get the last letter of a string, you can subtract one from the string's length.
+
+For example, if var firstName = "Charles", you can get the value of the last letter of the string
+by using firstName[firstName.length - 1].
+Example:
+
+        var firstName = "Charles";
+        var lastLetter = firstName[firstName.length - 1];
+
+Use Bracket Notation to Find the Nth-to-Last Character in a String
+
+You can use the same principle we just used to retrieve the last character in a string to retrieve the Nth-to-last character.
+For example, you can get the value of the third-to-last letter
+of the var firstName = "Charles" string by using firstName[firstName.length - 3]
