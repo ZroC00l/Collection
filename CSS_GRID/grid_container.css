@@ -6,7 +6,7 @@ in creating a container grid with 3 columns*/
     width: 100%;
     font-size:40px;
     display:grid;
-    /*This creates 3 columns each with a width of 50px*/
+    /*This creates 3 columns each with a width of 100px*/
     grid-template-columns:100px 100px 100px;
 }
 
