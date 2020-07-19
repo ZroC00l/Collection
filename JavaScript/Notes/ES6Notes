@@ -388,3 +388,26 @@ You can simply write x once, and it will be converted tox: x (or something equiv
 under the hood. Here is the same function from above rewritten to use this new syntax:
 
             const getMousePosition = (x, y) => ({ x, y });
+
+
+
+Write Concise Declarative Functions with ES6
+When defining functions within objects in ES5, we have to use the keyword function as follows:
+
+            const person = {
+              name: "Taylor",
+              sayHello: function() {
+                return `Hello! My name is ${this.name}.`;
+              }
+            };
+With ES6, You can remove the function keyword and colon altogether when defining functions in
+objects. Here's an example of this syntax:
+
+            const person = {
+              name: "Taylor",
+              sayHello() {
+                return `Hello! My name is ${this.name}.`;
+              }
+            };
+
+  Use class Syntax to Define a Constructor Function
