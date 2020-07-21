@@ -1,0 +1,24 @@
+Introduction to Debugging
+Debugging is the process of reviewing your code to find out why it behaves the way it does.There are 3 common
+errors one will encounter when debugging their code, these consist of:
+                -Runtime errors(having an infinite loop)
+                -Syntax error(misspelling of keywords or variable names)
+                -Semantic error(these are logical errors in your code)
+This section will focus on the tools we can use to debug our code as well as strategies of going about debugging.
+
+
+Use the JavaScript Console to Check the Value of a Variable
+We can use the chrome developer tools or firefox's web console to help us debug our code. It is important to keep
+in mind that debugging is a frustrating process, one that takes time and can only be improved upon through
+experience and time, thankfully we can use the "console.log()" statement to help ease the debugging process.
+console.log allows us to output our variable values to the console to have a look at whats stored inside them.
+Placing the console.log() statement strategically throughout your code can help you analyze the flow of your code
+as well as anticipate or determine were the variable values change or display irregular behaviour.
+
+
+Use typeof to Check the Type of a Variable
+typeof can help us in determining the data type of the variable or data structure being used. for instance
+say we have a function that is meant to add two variables which are of type number. Using typeof within the
+function can help us make certain that the function only takes two variables of type number and performs
+arithmetic operation on those numbers.
+
