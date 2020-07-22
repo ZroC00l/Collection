@@ -20,3 +20,24 @@ or any additional methods to reverse the string:
                     tempStr += string[for each index];
 
                  string=tempStr;
+
+
+Finding largest Element in SubArrays
+Write a method which takes in as parameter an array of subarrays , and find the largest element in each
+subarray. The method should return an array consisting of the largest element from each subarray
+
+    algorithm:
+            -declare an empty array to hold our result
+            -create first for loop with i=0 and the condition i<arr.length
+            -inside the first loop create a local var to hold the largest element
+            (this element will be the first value of the first subArray )
+            -So the step will be let max=arr[i][0]
+            -then nest another for loop with j=1 and the condition j<arr[i].length
+            (remember its a 2d array so it will require 2 loops j=1 so that its possible to iterate
+            through the inner loop without going out of bounds)
+            -inside the inner loop create an if statement :
+
+                if( array[row_index][column_index]>max)
+                    -then set max to the current largest value
+            -in the outer for loop then store the max into the results array
+            -then return the results array outside of the outer loop for the result.
