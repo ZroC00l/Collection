@@ -41,3 +41,8 @@ subarray. The method should return an array consisting of the largest element fr
                     -then set max to the current largest value
             -in the outer for loop then store the max into the results array
             -then return the results array outside of the outer loop for the result.
+
+
+Check Substring
+Write a method which takes in two parameters one should be a string and the other should be the substring
+the method should return true if the string ends with the substring argument or false if not.
