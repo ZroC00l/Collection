@@ -16,6 +16,8 @@ function Longest_String(str){
          //console.log(subArray[i]); will display the each index of subArray
         if(subArray[i].length>length){
             length=subArray[i].length;
+
+
         }
 
     }
