@@ -46,3 +46,8 @@ subarray. The method should return an array consisting of the largest element fr
 Check Substring
 Write a method which takes in two parameters one should be a string and the other should be the substring
 the method should return true if the string ends with the substring argument or false if not.
+The method should not use the built in function endsWith()
+
+Repeat String
+Write a method that takes in two parameters one a string the other a number, the method should then the string
+repeatedly depending the number argument , if the argument is 0 or negative return an empty string
