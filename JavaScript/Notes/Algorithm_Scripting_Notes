@@ -9,3 +9,14 @@ Write a function that takes a single argument.That argument will be the temperat
 should take in that argument in celsius and convert it to fahrenheit and return the results.
 
     alogrithm to convert celsius to fahrenheit: (temperature_in_celsius*(9/5))+32
+
+Reverse a string
+Write a method that takes a string as an argument and returns that string in reverse order.Dont use an array
+or any additional methods to reverse the string:
+
+    algorithm:
+                tempStr=""; //to hold the reverse string
+                for(i is equal to end of array string;i is greater than or equal to 0; decrement i)
+                    tempStr += string[for each index];
+
+                 string=tempStr;
