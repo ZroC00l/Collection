@@ -1,1 +1,11 @@
 Introduction to Basic Algorithm Scripting
+This section will focus on using learning algorithms to solve problems and code them. To write an algorithm
+one has to have a solid understanding of the problem at hand. An algorithm simply put is a sequence of steps
+you take in solving a problem.The easiest way to solve a problem in programming is breaking the problem down
+in to small manageable pieces that can be solved easily.
+
+Converting Celsius to Fahrenheit
+Write a function that takes a single argument.That argument will be the temperature in celsius, your function
+should take in that argument in celsius and convert it to fahrenheit and return the results.
+
+    alogrithm to convert celsius to fahrenheit: (temperature_in_celsius*(9/5))+32
