@@ -6,11 +6,7 @@ function splice_array(array1,array2,index){
 
        let tempArray=array2.slice();/*copies the entire contents of array2 into a temporary array,
                                      this is so the contents of array2 stay the same after splicing*/
-       for(let i=0;i<array1.length;i++){
-             tempArray.splice(index,0,array1[i]);
-             index++;
-       }
-
+       tempArray.splice(index,0,...array1);
        return tempArray;
 }
 
