@@ -51,3 +51,7 @@ The method should not use the built in function endsWith()
 Repeat String
 Write a method that takes in two parameters one a string the other a number, the method should then the string
 repeatedly depending the number argument , if the argument is 0 or negative return an empty string
+
+Truncate a String
+Truncate a string (first argument) if it is longer than the given maximum string length (second argument).
+Return the truncated string with a ... ending.
