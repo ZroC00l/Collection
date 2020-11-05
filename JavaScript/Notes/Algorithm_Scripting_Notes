@@ -60,3 +60,10 @@ Finders Keepers
 Create a function that looks through an array arr and returns the first element in it that passes a 'truth test'.
 This means that given an element x, the 'truth test' is passed if func(x) is true.
 If no element passes the test, return undefined.
+
+Where Do I Belong
+For this task I will be charged with creating a method which takes in two parameters, one an array of numbers and second argument 
+will be a number. The method must return a number in the case where a sorted array is traversed until a number(second argument)is less than the array index number, if the array index number is greater than the number(second argument) we return the array index at which the the number(second argument) is than the index number. If there is no array index number that is greater than or equal to the
+number(second argument) then the case must be handled accordingly.
+
+
