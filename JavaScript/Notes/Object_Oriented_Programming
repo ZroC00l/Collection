@@ -1,0 +1,32 @@
+Introduction To Object Oriented Programming
+
+Object Oriented Programming is a programming paradigm/model that organizes software design around data or objects,rather
+than on logic and functions.An object can be defined as a data field that has unique behaviour and attributes.
+Object Oriented programming focuses on objects that developers want to manipulate rather than the logic required to
+manipulate them.
+
+Object Oriented Programming is well suited for programs that are large,complex and are actively being maintained or updated.
+The Organization of an oo program adds the benefit of collaborative development in cases where projects are divided into groups.
+There are other benefits to OOP and these are: code reusability,scalability and effciency.
+
+The first step when designing an oo program is to collect all objects that the developer wants to manipulate and then identify
+how those objects relate to one another, this process is known as data modeling. Examples of an object can range from physical entities, such as a human being who is described by name,address,age etc.
+
+OOP is based on 4 principles that we will work through each through a series of solving challenges on freeCode Camp:
+
+	1.Encapsulation: The implementation and state of each object are privately held inside a defined boundary, or class. Other objects do not have access to this class or the authority to make changes but are only able to call a list of public functions, or methods. This characteristic of data hiding provides greater program security and avoids unintended data corruption.
+
+	2.Abstraction:Objects only reveal internal mechanisms that are relevant for the use of other objects, hiding any unnecessary implementation code. This concept helps developers more easily make changes and additions over time.
+
+	3.Inheritance: Relationships and subclasses between objects can be assigned, allowing developers to reuse a common logic while still maintaining a unique hierarchy. This property of OOP forces a more thorough data analysis, reduces development time and ensures a higher level of accuracy
+
+	4.Polymorphism:Objects can take on more than one form depending on the context. The program will determine which meaning or usage is necessary for each execution of that object, cutting down the need to duplicate code.
+
+
+Although it has many benefits that comes with it OOP has been criticized by other developers for putting more focus on organizing 
+software design around data rather than focus more on computation and algorithms. OOP can be quite difficult to write and even puts more burden on computation, thus other alternative methods to OOP that have been proposed are:
+	
+	1.Functional Programming
+	2.Structured Programming
+	3.Imperative Programming
+

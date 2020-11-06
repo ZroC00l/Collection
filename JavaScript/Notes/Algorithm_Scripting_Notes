@@ -69,4 +69,7 @@ number(second argument) then the case must be handled accordingly.
 Array Mutation
 For this challenge I had to create a mutation array consistig of two string parameters. The second string's characters where to be searched if they were all present in the first string parameter of the array.
 
+Chuncky Array
+For this task I will be creating a method that takes in two parameters, first being an array, second argument being size. The method should therefore take in any array, and split the array into an array of sub-arrays using the size argument.
+
 
