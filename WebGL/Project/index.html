@@ -1,0 +1,1170 @@
+<html><head>
+<title>Pirate Ship</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<script type="text/javascript" src="utils/glMatrix-0.js"></script>
+<script type="text/javascript" src="utils/webgl-utils.js"></script>
+<script id="per-fragment-lighting-fs" type="x-shader/x-fragment">
+    precision mediump float;
+
+    varying vec2 vTextureCoord;
+    varying vec3 vTransformedNormal;
+    varying vec4 vPosition;
+
+    uniform float uMaterialShininess;
+
+    uniform bool uShowSpecularHighlights;
+    uniform bool uUseLighting;
+    uniform bool uUseTextures;
+
+    uniform vec3 uAmbientColor;
+
+    uniform vec3 uPointLightingLocation;
+    uniform vec3 uPointLightingSpecularColor;
+    uniform vec3 uPointLightingDiffuseColor;
+
+    uniform sampler2D uSampler;
+
+    uniform float uAlpha;
+
+    void main(void) {
+        vec3 lightWeighting;
+        if (!uUseLighting) {
+            lightWeighting = vec3(1.0, 1.0, 1.0);
+        } else {
+            vec3 lightDirection = normalize(uPointLightingLocation - vPosition.xyz);
+            vec3 normal = normalize(vTransformedNormal);
+
+            float specularLightWeighting = 0.0;
+            if (uShowSpecularHighlights) {
+                vec3 eyeDirection = normalize(-vPosition.xyz);
+                vec3 reflectionDirection = reflect(-lightDirection, normal);
+
+                specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
+            }
+
+            float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
+            lightWeighting = uAmbientColor
+                + uPointLightingSpecularColor * specularLightWeighting
+                + uPointLightingDiffuseColor * diffuseLightWeighting;
+        }
+
+        vec4 fragmentColor;
+        if (uUseTextures) {
+            fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+        } else {
+            fragmentColor = vec4(1.0, 1.0, 1.0, 1.0);
+        }
+        gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a);
+        
+    }
+</script>
+
+<script id="per-fragment-lighting-vs" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+    attribute vec3 aVertexNormal;
+    attribute vec2 aTextureCoord;
+
+    uniform mat4 uMVMatrix;
+    uniform mat4 uPMatrix;
+    uniform mat3 uNMatrix;
+
+    varying vec2 vTextureCoord;
+    varying vec3 vTransformedNormal;
+    varying vec4 vPosition;
+
+    void main(void) {
+        vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
+        gl_Position = uPMatrix * vPosition;
+        vTextureCoord = aTextureCoord;
+        vTransformedNormal = uNMatrix * aVertexNormal;
+        gl_PointSize = 3.0;
+    }
+</script>
+
+
+<script type="text/javascript">
+
+    var gl;
+    var projection = "perspective";
+    var lava = false;
+    var colourChange=false;
+    var ghost = false;
+    var fireShear = false;
+    var capScale = 1;
+    var translate_pirate = 0;
+    var translate_barrel=0;
+    var translate_bird=0;
+    var barrel_shear=false;
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
+
+    function initGL(canvas) {
+        try {
+            gl = canvas.getContext("webgl");
+            canvas.width = document.body.clientWidth;
+            canvas.height = document.body.clientHeight;
+            gl.viewportWidth = canvas.width;
+            gl.viewportHeight = canvas.height;
+        } catch (e) {
+        }
+        if (!gl) {
+            alert("Could not initialise WebGL.");
+        }
+    }
+
+
+    function getShader(gl, id) {
+        var shaderScript = document.getElementById(id);
+        if (!shaderScript) {
+            return null;
+        }
+
+        var str = "";
+        var k = shaderScript.firstChild;
+        while (k) {
+            if (k.nodeType == 3) {
+                str += k.textContent;
+            }
+            k = k.nextSibling;
+        }
+
+        var shader;
+        if (shaderScript.type == "x-shader/x-fragment") {
+            shader = gl.createShader(gl.FRAGMENT_SHADER);
+        } else if (shaderScript.type == "x-shader/x-vertex") {
+            shader = gl.createShader(gl.VERTEX_SHADER);
+        } else {
+            return null;
+        }
+
+        gl.shaderSource(shader, str);
+        gl.compileShader(shader);
+
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+            alert(gl.getShaderInfoLog(shader));
+            return null;
+        }
+
+        return shader;
+    }
+
+    var shaderProgram;
+
+    function initShaders() {
+        var fragmentShader = getShader(gl, "per-fragment-lighting-fs");
+        var vertexShader = getShader(gl, "per-fragment-lighting-vs");
+
+        shaderProgram = gl.createProgram();
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+
+        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+            alert("Could not initialise shaders");
+        }
+
+        gl.useProgram(shaderProgram);
+
+        shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
+        gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+
+        shaderProgram.vertexNormalAttribute = gl.getAttribLocation(shaderProgram, "aVertexNormal");
+        gl.enableVertexAttribArray(shaderProgram.vertexNormalAttribute);
+
+        shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aTextureCoord");
+        gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
+
+        shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
+        shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+        shaderProgram.nMatrixUniform = gl.getUniformLocation(shaderProgram, "uNMatrix");
+        shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
+        shaderProgram.materialShininessUniform = gl.getUniformLocation(shaderProgram, "uMaterialShininess");
+        shaderProgram.showSpecularHighlightsUniform = gl.getUniformLocation(shaderProgram, "uShowSpecularHighlights");
+        shaderProgram.useTexturesUniform = gl.getUniformLocation(shaderProgram, "uUseTextures");
+        shaderProgram.useLightingUniform = gl.getUniformLocation(shaderProgram, "uUseLighting");
+        shaderProgram.ambientColorUniform = gl.getUniformLocation(shaderProgram, "uAmbientColor");
+        shaderProgram.pointLightingLocationUniform = gl.getUniformLocation(shaderProgram, "uPointLightingLocation");
+        shaderProgram.pointLightingSpecularColorUniform = gl.getUniformLocation(shaderProgram, "uPointLightingSpecularColor");
+        shaderProgram.pointLightingDiffuseColorUniform = gl.getUniformLocation(shaderProgram, "uPointLightingDiffuseColor");
+        shaderProgram.alphaUniform = gl.getUniformLocation(shaderProgram, "uAlpha");
+    }
+
+    function handleLoadedTexture(texture) {
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_NEAREST);
+        gl.generateMipmap(gl.TEXTURE_2D);
+        gl.bindTexture(gl.TEXTURE_2D, null);
+    }
+
+    var shipTexture;
+    var skyTexture;
+    var seaTexture;
+    var boxTexture;
+    var pirateTexture;
+    var chestTexture;
+    var changeTexture;
+
+    function initTextures() {
+        shipTexture = gl.createTexture();
+        shipTexture.image = new Image();
+        shipTexture.image.onload = function () { handleLoadedTexture(shipTexture) }
+        shipTexture.image.src = "textures/shipTexture.png";
+
+        boxTexture = gl.createTexture();
+        boxTexture.image = new Image();
+        boxTexture.image.onload = function () { handleLoadedTexture(boxTexture) }
+        boxTexture.image.src = "textures/box.png";
+
+        seaTexture = gl.createTexture();
+        seaTexture.image = new Image();
+        seaTexture.image.onload = function () { handleLoadedTexture(seaTexture) }
+        seaTexture.image.src = "textures/sea2.jpg";
+
+        skyTexture = gl.createTexture();
+        skyTexture.image = new Image();
+        skyTexture.image.onload = function () { handleLoadedTexture(skyTexture) }
+        skyTexture.image.src = "textures/sky2.jpg";
+
+        pirateTexture = gl.createTexture();
+        pirateTexture.image = new Image();
+        pirateTexture.image.onload = function () { handleLoadedTexture(pirateTexture) }
+        pirateTexture.image.src = "textures/pirate.png";
+	
+	///////////////////Adding Chest Texture//////////////////////////
+	chestTexture = gl.createTexture();
+        chestTexture.image = new Image();
+        chestTexture.image.onload = function () { handleLoadedTexture(chestTexture) }
+        chestTexture.image.src = "textures/chest.png";
+	//////////////////////////////////////////////////////////////////////////////
+
+        environmentTexture = gl.createTexture();
+        environmentTexture.image = new Image();
+        environmentTexture.image.onload = function () { handleLoadedTexture(environmentTexture) }
+        environmentTexture.image.src = "textures/environment.png";
+
+        smokeTexture = gl.createTexture();
+        smokeTexture.image = new Image();
+        smokeTexture.image.onload = function () { handleLoadedTexture(smokeTexture) }
+        smokeTexture.image.src = "textures/fire-alt.jpg";
+
+        starsTexture = gl.createTexture();
+        starsTexture.image = new Image();
+        starsTexture.image.onload = function () { handleLoadedTexture(starsTexture) }
+        starsTexture.image.src = "textures/moon.jpg";
+	
+	
+	/////////////////////Change barrel texture colour on click//////////////
+	 changeTexture = gl.createTexture();
+        changeTexture.image = new Image();
+        changeTexture.image.onload = function () { handleLoadedTexture(changeTexture) }
+        changeTexture.image.src = "textures/box2.png////";
+	////////////////////////////////////////////////////////////////////////////////////////
+	
+
+       monkeyTexture = gl.createTexture();
+        monkeyTexture.image = new Image();
+        monkeyTexture.image.onload = function () { handleLoadedTexture(monkeyTexture) }
+        monkeyTexture.image.src = "textures/Bird.png";
+
+        yellowTexture = gl.createTexture();
+        yellowTexture.image = new Image();
+        yellowTexture.image.onload = function () { handleLoadedTexture(yellowTexture) }
+        yellowTexture.image.src = "textures/yellow.jpg";
+    }
+
+
+    mvMatrix = mat4.create();
+    mvMatrixStack = [];
+    pMatrix = mat4.create();
+
+    function mvPushMatrix() {
+        var copy = mat4.create();
+        mat4.set(mvMatrix, copy);
+        mvMatrixStack.push(copy);
+    }
+
+    function mvPopMatrix() {
+        if (mvMatrixStack.length == 0) {
+            throw "Invalid popMatrix!";
+        }
+        mvMatrix = mvMatrixStack.pop();
+    }
+
+    function setMatrixUniforms() {
+        gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
+        gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
+
+        var normalMatrix = mat3.create();
+        mat4.toInverseMat3(mvMatrix, normalMatrix);
+        mat3.transpose(normalMatrix);
+        gl.uniformMatrix3fv(shaderProgram.nMatrixUniform, false, normalMatrix);
+    }
+
+    function degToRad(degrees) {
+        return degrees * Math.PI / 180;
+    }
+    var shipVertexPositionBuffer;
+    var shipVertexNormalBuffer;
+    var shipVertexTextureCoordBuffer;
+    var shipVertexIndexBuffer;
+
+    function handleLoadedShip(shipData) {
+      shipVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, shipVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shipData.data.attributes.normal.array), gl.STATIC_DRAW);
+        shipVertexNormalBuffer.itemSize = 3;
+        shipVertexNormalBuffer.numItems = shipData.data.attributes.normal.array / 3;
+
+        shipVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, shipVertexTextureCoordBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shipData.data.attributes.uv.array), gl.STATIC_DRAW);
+        shipVertexTextureCoordBuffer.itemSize = 2;
+        shipVertexTextureCoordBuffer.numItems = shipData.data.attributes.uv.array.length / 2;
+
+        shipVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, shipVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(shipData.data.attributes.position.array), gl.STATIC_DRAW);
+        shipVertexPositionBuffer.itemSize = 3;
+        shipVertexPositionBuffer.numItems = shipData.data.attributes.normal.array.length / 3;
+
+        shipVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, shipVertexIndexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(shipData.data.index.array), gl.STATIC_DRAW);
+        shipVertexIndexBuffer.itemSize = 1;
+        shipVertexIndexBuffer.numItems = shipData.data.index.array.length;
+    }
+
+    function loadShip() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "models/workInProgress3.json");
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                handleLoadedShip(JSON.parse(request.responseText));
+            }
+        }
+        request.send();
+    }
+    
+
+    var planeVertexPositionBuffer;
+    var planeVertexNormalBuffer;
+    var planeVertexTextureCoordBuffer;
+    var planeVertexIndexBuffer;
+
+    function handleLoadedPlane(planeData) {
+        planeVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(planeData.data.attributes.normal.array), gl.STATIC_DRAW);
+        planeVertexNormalBuffer.itemSize = 3;
+        planeVertexNormalBuffer.numItems = planeData.data.attributes.normal.array / 3;
+
+        planeVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexTextureCoordBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(planeData.data.attributes.uv.array), gl.STATIC_DRAW);
+        planeVertexTextureCoordBuffer.itemSize = 2;
+        planeVertexTextureCoordBuffer.numItems = planeData.data.attributes.uv.array.length / 2;
+
+        planeVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(planeData.data.attributes.position.array), gl.STATIC_DRAW);
+        planeVertexPositionBuffer.itemSize = 3;
+        planeVertexPositionBuffer.numItems = planeData.data.attributes.normal.array.length / 3;
+
+        planeVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, planeVertexIndexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(planeData.data.index.array), gl.STATIC_DRAW);
+        planeVertexIndexBuffer.itemSize = 1;
+        planeVertexIndexBuffer.numItems = planeData.data.index.array.length;
+    }
+
+    function loadPlane() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "models/plane.json");
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                handleLoadedPlane(JSON.parse(request.responseText));
+            }
+        }
+        request.send();
+    }
+    var planeAngle = 180;
+
+    var pirateVertexPositionBuffer;
+    var pirateVertexNormalBuffer;
+    var pirateVertexTextureCoordBuffer;
+    var pirateVertexIndexBuffer;
+
+    function handleLoadedPirate(pirateData) {
+        pirateVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, pirateVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pirateData.data.attributes.normal.array), gl.STATIC_DRAW);
+        pirateVertexNormalBuffer.itemSize = 3;
+        pirateVertexNormalBuffer.numItems = pirateData.data.attributes.normal.array / 3;
+
+        pirateVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, pirateVertexTextureCoordBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pirateData.data.attributes.uv.array), gl.STATIC_DRAW);
+        pirateVertexTextureCoordBuffer.itemSize = 2;
+        pirateVertexTextureCoordBuffer.numItems = pirateData.data.attributes.uv.array.length / 2;
+
+        pirateVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, pirateVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(pirateData.data.attributes.position.array), gl.STATIC_DRAW);
+        pirateVertexPositionBuffer.itemSize = 3;
+        pirateVertexPositionBuffer.numItems = pirateData.data.attributes.normal.array.length / 3;
+
+        pirateVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, pirateVertexIndexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(pirateData.data.index.array), gl.STATIC_DRAW);
+        pirateVertexIndexBuffer.itemSize = 1;
+        pirateVertexIndexBuffer.numItems = pirateData.data.index.array.length;
+    }
+
+
+    function loadPirate() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "models/pirate.json");
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                handleLoadedPirate(JSON.parse(request.responseText));
+            }
+        }
+        request.send();
+    }
+
+    var barrelVertexPositionBuffer;
+    var barrelVertexNormalBuffer;
+    var barrelVertexTextureCoordBuffer;
+    var barrelVertexIndexBuffer;
+
+    function handleLoadedBarrel(barrelData) {
+        barrelVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, barrelVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(barrelData.data.attributes.normal.array), gl.STATIC_DRAW);
+        barrelVertexNormalBuffer.itemSize = 3;
+        barrelVertexNormalBuffer.numItems = barrelData.data.attributes.normal.array / 3;
+
+        barrelVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, barrelVertexTextureCoordBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(barrelData.data.attributes.uv.array), gl.STATIC_DRAW);
+        barrelVertexTextureCoordBuffer.itemSize = 2;
+        barrelVertexTextureCoordBuffer.numItems = barrelData.data.attributes.uv.array.length / 2;
+
+        barrelVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, barrelVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(barrelData.data.attributes.position.array), gl.STATIC_DRAW);
+        barrelVertexPositionBuffer.itemSize = 3;
+        barrelVertexPositionBuffer.numItems = barrelData.data.attributes.normal.array.length / 3;
+
+        barrelVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, barrelVertexIndexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(barrelData.data.index.array), gl.STATIC_DRAW);
+        barrelVertexIndexBuffer.itemSize = 1;
+        barrelVertexIndexBuffer.numItems = barrelData.data.index.array.length;
+    }
+
+    function loadBarrel() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "models/barrel3.json");
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                handleLoadedBarrel(JSON.parse(request.responseText));
+            }
+        }
+        request.send();
+    }
+    
+    
+    ///////////////////////////////////Chest Buffers///////////////////////////////////////////////////
+     var chestVertexPositionBuffer;
+    var chestVertexNormalBuffer;
+    var chestVertexTextureCoordBuffer;
+    var chestVertexIndexBuffer;
+
+    function handleLoadedChest(chestData) {
+        chestVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, chestVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(chestData.data.attributes.normal.array), gl.STATIC_DRAW);
+        chestVertexNormalBuffer.itemSize = 3;
+        chestVertexNormalBuffer.numItems = chestData.data.attributes.normal.array / 3;
+
+        chestVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, chestVertexTextureCoordBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(chestData.data.attributes.uv.array), gl.STATIC_DRAW);
+        chestVertexTextureCoordBuffer.itemSize = 2;
+        chestVertexTextureCoordBuffer.numItems = chestData.data.attributes.uv.array.length / 2;
+
+        chestVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, chestVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(chestData.data.attributes.position.array), gl.STATIC_DRAW);
+        chestVertexPositionBuffer.itemSize = 3;
+        chestVertexPositionBuffer.numItems = chestData.data.attributes.normal.array.length / 3;
+
+        chestVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, chestVertexIndexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(chestData.data.index.array), gl.STATIC_DRAW);
+        chestVertexIndexBuffer.itemSize = 1;
+        chestVertexIndexBuffer.numItems = chestData.data.index.array.length;
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    /////////////////////////////////////// Loading the chest from JSON File//////////////////////////////////////////////
+      function loadChest() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "models/chest6.json");
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                handleLoadedChest(JSON.parse(request.responseText));
+            }
+        }
+        request.send();
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    var monkeyVertexPositionBuffer;
+    var monkeyVertexNormalBuffer;
+    var monkeyVertexTextureCoordBuffer;
+    var monkeyVertexIndexBuffer;
+
+    function handleLoadedMonkey(monkeyData) {
+        monkeyVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, monkeyVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(monkeyData.data.attributes.normal.array), gl.STATIC_DRAW);
+        monkeyVertexNormalBuffer.itemSize = 3;
+        monkeyVertexNormalBuffer.numItems = monkeyData.data.attributes.normal.array / 3;
+
+        monkeyVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, monkeyVertexTextureCoordBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(monkeyData.data.attributes.uv.array), gl.STATIC_DRAW);
+        monkeyVertexTextureCoordBuffer.itemSize = 2;
+        monkeyVertexTextureCoordBuffer.numItems = monkeyData.data.attributes.uv.array.length / 2;
+
+        monkeyVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, monkeyVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(monkeyData.data.attributes.position.array), gl.STATIC_DRAW);
+        monkeyVertexPositionBuffer.itemSize = 3;
+        monkeyVertexPositionBuffer.numItems = monkeyData.data.attributes.normal.array.length / 3;
+
+        monkeyVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, monkeyVertexIndexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(monkeyData.data.index.array), gl.STATIC_DRAW);
+        monkeyVertexIndexBuffer.itemSize = 1;
+        monkeyVertexIndexBuffer.numItems = monkeyData.data.index.array.length;
+    }
+
+	function loadMonkey() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "models/Bird4.json");
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                handleLoadedMonkey(JSON.parse(request.responseText));
+            }
+        }
+        request.send();
+    }
+
+    function randomArray(length, max) {
+        var array = [...new Array(length)].map(() => (-Math.random() * max));
+        return array;
+    }
+
+    function cardinalArray(length) {
+        var array = [];
+        for (var i=0;i<length;++i) { array[i]=i };
+        return array;
+    }
+
+    // PARTICLES
+
+    var particleVertexPositionBuffer;
+    var particleVertexNormalBuffer;
+    var particleVertexTextureCoordBuffer;
+    var particleVertexIndexBuffer;
+    var numParticles = 3000;
+    var spread = 1;
+
+    var particlePositionArray = [];
+
+    function createParticles() {
+        particlePositionArray = randomArray(numParticles*3, spread);
+        particleVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(randomArray(numParticles*3, spread)), gl.STATIC_DRAW);
+        particleVertexNormalBuffer.itemSize = 3;
+        particleVertexNormalBuffer.numItems = numParticles;
+
+        particleVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexTextureCoordBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(randomArray(numParticles*2, spread)), gl.STATIC_DRAW);
+        particleVertexTextureCoordBuffer.itemSize = 2;
+        particleVertexTextureCoordBuffer.numItems = numParticles;
+
+        particleVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(particlePositionArray), gl.STATIC_DRAW);
+        particleVertexPositionBuffer.itemSize = 3;
+        particleVertexPositionBuffer.numItems = numParticles;
+
+        particleVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, particleVertexIndexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cardinalArray(numParticles*3)), gl.STATIC_DRAW);
+        particleVertexIndexBuffer.itemSize = 1;
+        particleVertexIndexBuffer.numItems = numParticles;
+    }
+
+    function moveParticles() {
+        for (var i=0; i < numParticles; ++i) {
+            if (i % 3 == 1) {
+                particlePositionArray[i] += 0.03;
+                particlePositionArray[i] = particlePositionArray[i] % (1 + Math.random() * 3);
+            }
+        }
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(particlePositionArray), gl.STATIC_DRAW);
+    }
+
+    var starVertexPositionBuffer;
+    var starVertexNormalBuffer;
+    var starVertexTextureCoordBuffer;
+    var starVertexIndexBuffer;
+    var numStar = 8000;
+    var starSpread = 10;
+    var starRotate = 0;
+    var starPositionArray = [];
+
+    function createStars() {
+        starPositionArray = randomArray(numParticles*3, starSpread);
+        starVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, starVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(randomArray(numParticles*3, starSpread)), gl.STATIC_DRAW);
+        starVertexNormalBuffer.itemSize = 3;
+        starVertexNormalBuffer.numItems = numParticles;
+
+        starVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, starVertexTextureCoordBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(randomArray(numParticles*2, starSpread)), gl.STATIC_DRAW);
+        starVertexTextureCoordBuffer.itemSize = 2;
+        starVertexTextureCoordBuffer.numItems = numParticles;
+
+        starVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, starVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(starPositionArray), gl.STATIC_DRAW);
+        starVertexPositionBuffer.itemSize = 3;
+        starVertexPositionBuffer.numItems = numParticles;
+
+        starVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, starVertexIndexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cardinalArray(numParticles*3)), gl.STATIC_DRAW);
+        starVertexIndexBuffer.itemSize = 1;
+        starVertexIndexBuffer.numItems = numParticles;
+    }
+
+    function moveFireflies() {
+        for (var i=0; i < numStar; ++i) {
+                starPositionArray[i] += Math.pow(-1, Math.round(Math.random())) * 0.007;
+        }
+        gl.bindBuffer(gl.ARRAY_BUFFER, starVertexPositionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(starPositionArray), gl.STATIC_DRAW);
+    }
+
+    var rotate_pirate = 0;
+    var rotate_barrel=0;
+    var rotate_bird=0;
+    var bob = 0;
+
+    function drawScene() {
+        gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        if (shipVertexPositionBuffer == null
+          || shipVertexNormalBuffer == null
+          || shipVertexTextureCoordBuffer == null
+          || shipVertexIndexBuffer == null
+          || planeVertexPositionBuffer == null
+          || planeVertexNormalBuffer == null
+          || planeVertexTextureCoordBuffer == null
+          || planeVertexIndexBuffer == null
+          || pirateVertexPositionBuffer == null
+          || pirateVertexNormalBuffer == null
+          || pirateVertexTextureCoordBuffer == null
+          || pirateVertexIndexBuffer == null
+          || barrelVertexPositionBuffer == null
+          || barrelVertexNormalBuffer == null
+          || barrelVertexTextureCoordBuffer == null
+          || barrelVertexIndexBuffer == null
+          || particleVertexPositionBuffer == null
+          || particleVertexNormalBuffer == null
+          || particleVertexTextureCoordBuffer == null
+          || particleVertexIndexBuffer == null
+	  || chestVertexPositionBuffer == null//////////////////////////////////////////////////////////C
+          || chestVertexNormalBuffer == null//////////////////////////////////////////////////////////H
+          || chestVertexTextureCoordBuffer == null//////////////////////////////////////////////////E
+          || chestVertexIndexBuffer == null/////////////////////////////////////////////////////////////ST
+          || starVertexPositionBuffer == null
+          || starVertexNormalBuffer == null
+          || starVertexTextureCoordBuffer == null
+          || starVertexIndexBuffer == null
+          || monkeyVertexPositionBuffer == null
+          || monkeyVertexNormalBuffer == null
+         || monkeyVertexTextureCoordBuffer == null
+          || monkeyVertexIndexBuffer == null) {
+            return;
+        }
+        if (projection == "perspective") {
+            mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 200.0, pMatrix);
+        } else { pMatrix = ortho(-5.0, 5.0, -5.0, 5.0, -100.0, 200.0); }
+        var specularHighlights = document.getElementById("specular").checked;
+        gl.uniform1i(shaderProgram.showSpecularHighlightsUniform, specularHighlights);
+        var lighting = document.getElementById("lighting").checked;
+        gl.uniform1i(shaderProgram.useLightingUniform, lighting);
+        if (lighting) {
+            gl.uniform3f(
+                shaderProgram.ambientColorUniform,
+                parseFloat(document.getElementById("ambientR").value),
+                parseFloat(document.getElementById("ambientG").value),
+                parseFloat(document.getElementById("ambientB").value)
+            );
+            gl.uniform3f(
+                shaderProgram.pointLightingLocationUniform,
+                parseFloat(document.getElementById("lightPositionX").value),
+                parseFloat(document.getElementById("lightPositionY").value),
+                parseFloat(document.getElementById("lightPositionZ").value)
+            );
+            gl.uniform3f(
+                shaderProgram.pointLightingSpecularColorUniform,
+                parseFloat(document.getElementById("specularR").value),
+                parseFloat(document.getElementById("specularG").value),
+                parseFloat(document.getElementById("specularB").value)
+            );
+            gl.uniform3f(
+                shaderProgram.pointLightingDiffuseColorUniform,
+                parseFloat(document.getElementById("diffuseR").value),
+                parseFloat(document.getElementById("diffuseG").value),
+                parseFloat(document.getElementById("diffuseB").value)
+            );
+        }
+
+        var texture = document.getElementById("texture").value;
+        gl.uniform1i(shaderProgram.useTexturesUniform, texture != "none");
+        mat4.identity(mvMatrix);
+        gl.bindTexture(gl.TEXTURE_2D, shipTexture);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.uniform1i(shaderProgram.samplerUniform, 0);
+        gl.uniform1f(shaderProgram.materialShininessUniform, parseFloat(document.getElementById("shininess").value));
+
+        // Ship
+        mvPushMatrix();
+        translate(mvMatrix, [0, -3, -12]);
+        mat4.rotate(mvMatrix, degToRad(23.4), [0, -1, 0]);
+        gl.bindBuffer(gl.ARRAY_BUFFER, shipVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, shipVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, shipVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, shipVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, shipVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, shipVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, shipVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.TRIANGLES, shipVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+
+        // Plane
+        mvPushMatrix();
+        gl.bindTexture(gl.TEXTURE_2D, seaTexture);
+        translate(mvMatrix, [0, -3 + 0.3*Math.cos(bob), -4]);
+        bob += 0.01;
+        scale(mvMatrix, [50,1,50]);
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, planeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, planeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, planeVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, planeVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.TRIANGLES, planeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+
+        // Sky
+        mvPushMatrix();
+        if (lava) {
+            gl.bindTexture(gl.TEXTURE_2D, starsTexture);
+        } else {
+            gl.bindTexture(gl.TEXTURE_2D, skyTexture);
+        }
+        translate(mvMatrix, [0, 100, -199]);
+        mat4.rotate(mvMatrix, degToRad(90), [1, 0, 0]);
+        mat4.rotate(mvMatrix, degToRad(180), [1, 0, 0]);
+        scale(mvMatrix, [170,1,150]);
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, planeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, planeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, planeVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, planeVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, planeVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.TRIANGLES, planeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+
+        // pirate
+        if (ghost) { gl.enable(gl.BLEND); }
+        mvPushMatrix();
+        gl.bindTexture(gl.TEXTURE_2D, pirateTexture);
+        translate(mvMatrix, [-1.6 + translate_pirate, -1.3, -10]);
+        scale(mvMatrix, [0.7,0.7,0.7]);
+        mat4.rotate(mvMatrix, 0.5*rotate_pirate, [0,1,0]);
+        gl.bindBuffer(gl.ARRAY_BUFFER, pirateVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, pirateVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, pirateVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, pirateVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, pirateVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, pirateVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, pirateVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.TRIANGLES, pirateVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+        gl.disable(gl.BLEND);
+
+
+	  // Barrel
+	 mvPushMatrix();
+	if(barrel_shear){
+	shearX(mvMatrix, degToRad(65));
+	}
+	gl.bindTexture(gl.TEXTURE_2D, boxTexture);
+	if(colourChange)
+	{
+		 gl.bindTexture(gl.TEXTURE_2D, changeTexture);
+		 }
+        translate(mvMatrix, [1+translate_barrel, -3, -10]);
+        scale(mvMatrix, [0.5,0.5,0.5]);
+	mat4.rotate(mvMatrix,0.5*rotate_barrel,[0,1,0]);
+        gl.bindBuffer(gl.ARRAY_BUFFER, barrelVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, barrelVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, barrelVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, barrelVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, barrelVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, barrelVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, barrelVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.TRIANGLES, barrelVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+	
+	
+           
+	
+	//Chest
+	  mvPushMatrix();
+        gl.bindTexture(gl.TEXTURE_2D,chestTexture);
+        translate(mvMatrix, [1, -3, -10]);
+        scale(mvMatrix, [0.5,0.5,0.5]);
+        gl.bindBuffer(gl.ARRAY_BUFFER, chestVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, chestVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, chestVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, chestVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, chestVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, chestVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, chestVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.TRIANGLES, chestVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+
+
+       // Bird and Captain
+        if (ghost) { gl.enable(gl.BLEND); }
+        mvPushMatrix();
+        gl.bindTexture(gl.TEXTURE_2D, monkeyTexture);
+        scale(mvMatrix, [0.8, 0.8*capScale,0.8]);
+        translate(mvMatrix, [-1.8+translate_bird, -1.4, -7.7]);
+        mat4.rotate(mvMatrix,0.5*rotate_bird, [0,-1,0]);
+        gl.bindBuffer(gl.ARRAY_BUFFER, monkeyVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, monkeyVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, monkeyVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, monkeyVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, monkeyVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, monkeyVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, monkeyVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.TRIANGLES, monkeyVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+        gl.disable(gl.BLEND);
+
+        // Particle
+        mvPushMatrix();
+        if (fireShear) {
+            shearX(mvMatrix, degToRad(65));
+        }
+        translate(mvMatrix, [2, 0, -20]);
+        gl.bindTexture(gl.TEXTURE_2D, smokeTexture);
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, particleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, particleVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, particleVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, particleVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.POINTS, particleVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+
+        mvPushMatrix();
+        if (fireShear) {
+            shearX(mvMatrix, degToRad(65));
+        }
+        translate(mvMatrix, [1.9, -1, -13]);
+        gl.bindTexture(gl.TEXTURE_2D, smokeTexture);
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexPositionBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, particleVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexTextureCoordBuffer);
+        gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, particleVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, particleVertexNormalBuffer);
+        gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, particleVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, particleVertexIndexBuffer);
+        setMatrixUniforms();
+        gl.drawElements(gl.POINTS, particleVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+        mvPopMatrix();
+
+        // Stars
+        if (lava) {
+            mvPushMatrix();
+            translate(mvMatrix, [5, 14, -10]);
+            gl.bindTexture(gl.TEXTURE_2D, yellowTexture);
+            gl.bindBuffer(gl.ARRAY_BUFFER, starVertexPositionBuffer);
+            gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, starVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+            gl.bindBuffer(gl.ARRAY_BUFFER, starVertexTextureCoordBuffer);
+            gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, starVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+            gl.bindBuffer(gl.ARRAY_BUFFER, starVertexNormalBuffer);
+            gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute, starVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, starVertexIndexBuffer);
+            setMatrixUniforms();
+            gl.drawElements(gl.POINTS, starVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+            mvPopMatrix();
+        }
+    }
+    var lastTime = 0;
+    function animate() {
+        var timeNow = new Date().getTime();
+        if (lastTime != 0) {
+            var elapsed = timeNow - lastTime;
+        }
+        lastTime = timeNow;
+        moveParticles();
+        moveFireflies();
+    }
+
+    var tick_count = 0;
+
+    function tick() {
+        window.requestAnimationFrame(tick);
+        drawScene();
+        animate();
+        
+    }
+    
+
+    function webGLStart() {
+        var canvas = document.getElementById("canvas");
+        initGL(canvas);
+        initShaders();
+        initTextures();
+        loadShip();
+        loadPlane();
+        loadPirate();
+        loadBarrel();
+	loadChest();
+        loadMonkey();
+        createParticles();
+        createStars();
+        gl.clearColor(0.0,0.0,0.0,1.0);
+        gl.enable(gl.DEPTH_TEST);
+        gl.depthFunc(gl.LESS);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+        tick();
+    }
+
+    function handleKeyDown(event) {
+        switch(event.key) {
+            case "a" : rotate_pirate += 1; break; 
+            case "d" : rotate_pirate -= 1; break; 
+            case "1" : projection = "perspective"; break;
+            case "2" : projection = "orthogonal"; break;
+            case "c" : lava = true; break;
+            case "g" : ghost = true; break;
+            case "n" : capScale += 0.15; break;
+            case "w" : translate_pirate += 0.25; break;
+            case "s" : translate_pirate -= 0.25; break;
+            case "m" : capScale -= 0.15; break;
+            case "k" : fireShear = true; break;
+	    case "v": rotate_barrel +=1;break;
+	    case "b": rotate_barrel -=1;break;
+	    case "z": translate_barrel +=0.25;break;
+	    case "x":translate_barrel -=0.25;break;
+	    case  "o": translate_bird +=0.25;break;
+	    case "p":translate_bird -=0.25;break;
+	    case "h":rotate_bird +=1;break;
+	    case "j":rotate_bird -=1;break;
+	    case "y": barrel_shear=true;break;
+	    case "u":barrel_shear=false;break;
+	    case "i":colourChange="true";break;
+	    
+        }
+    }
+
+function RGBAChange(c)
+{
+	c=changeTexture;
+	var temp= gl.bindTexture(gl.TEXTURE_2D, c);
+}
+
+    function handleKeyUp(event) {
+        switch(event.key) {
+            case "c" : lava = false; break;
+            case "g" : ghost = false; break;
+            case "k" : fireShear = false; break;            
+	    case "y":barrel_shear=false;break;
+	    case "i":colourChange=false;break;
+        }
+    }
+    
+    
+
+    function perspective(fov, far, near) {
+        var pMatrix = mat4.create();
+        var s = 1 / ( Math.tan ( (fov / 2) * (Math.PI / 180)) );
+        pMatrix[0] = s;
+        pMatrix[5] = s;
+        pMatrix[10] = - far / (far - near);
+        pMatrix[11] = - (far * near) / (far - near);
+        pMatrix[14] = -1;
+        return pMatrix;
+    }
+
+    function ortho(left, right, bottom, top, near, far) {
+        dest = mat4.create();
+        mat4.identity(dest);
+        dest[0] = 2 / (right - left);
+        dest[5] = 2 / (top - bottom);
+        dest[10] = -2 / (far - near);
+        dest[12] = - ((left + right)/(right - left));
+        dest[13] = - ((top + bottom)/(top - bottom));
+        dest[14] = - ((far + near)/(far - near));
+        return dest;
+    }
+
+    function translate(matrix, vector) {
+    if (vector != null) {
+        var translation_matrix = mat4.create();
+        mat4.identity(translation_matrix);
+        translation_matrix[12] = vector[0];
+        translation_matrix[13] = vector[1];
+        translation_matrix[14] = vector[2];
+        mat4.multiply(translation_matrix, matrix, matrix);
+    }
+    }
+
+    function shearX(matrix, angle) {
+        var translation_matrix = mat4.create();
+         mat4.identity(translation_matrix);
+        translation_matrix[4] = 1 / Math.tan(angle);
+         mat4.multiply(translation_matrix, matrix, matrix);
+    }
+
+    function shearY(matrix, angle) {
+        var translation_matrix = mat4.create();
+        mat4.identity(translation_matrix);
+        translation_matrix[1] = 1.0 / Math.tan(angle);
+        mat4.multiply(translation_matrix, matrix, matrix);
+    }
+
+    function shearZ(matrix, angle) {
+        var translation_matrix = mat4.create();
+        mat4.identity(translation_matrix);
+        translation_matrix[8] = 1 / Math.tan(angle);
+        mat4.multiply(translation_matrix, matrix, matrix);
+    }
+
+    function scale(matrix, dimensions) {
+        var translation_matrix = mat4.create();
+        mat4.identity(translation_matrix);
+        translation_matrix[0] = dimensions[0];
+        translation_matrix[5] = dimensions[1];
+        translation_matrix[10] = dimensions[2];
+        mat4.multiply(matrix, translation_matrix, matrix);
+    }
+
+</script>
+<style type="text/css">
+    #loadingtext {
+        position:absolute;
+        top:250px;
+        left:150px;
+        font-size:2em;
+        color: white;
+    }
+    body { margin: 0; }
+
+    canvas {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+
+</style>
+</head>
+<body onload="webGLStart();">
+    <canvas id="canvas" style="border: none;" width="1000" height="500"></canvas>
+    <div id="test"> </div>
+    <div id="loadingtext"></div>
+    <br>
+    <input id="specular" checked="checked" type="checkbox"> Show specular highlight<br>
+    <input id="lighting" checked="checked" type="checkbox"> Use lighting<br>
+    Texture:
+    <select id="texture">
+        <option value="none">None</option>
+        <option selected="selected" value="galvanized">Galvanized</option>
+        <option value="earth">Earth</option>
+    </select>
+    <br>
+    <h2>Material:</h2>
+    <table style="border: 0; padding: 10px;">
+        <tbody><tr>
+            <td><b>Shininess:</b>
+            </td><td><input id="shininess" value="5.0" type="text">
+        </td></tr>
+    </tbody></table>
+    <h2>Point light:</h2>
+    <table style="border: 0; padding: 10px;">
+        <tbody><tr>
+            <td><b>Location:</b>
+            </td><td>X: <input id="lightPositionX" value="-10.0" type="text">
+            </td><td>Y: <input id="lightPositionY" value="4.0" type="text">
+            </td><td>Z: <input id="lightPositionZ" value="-20.0" type="text">
+        </td></tr>
+        <tr>
+            <td><b>Specular colour:</b>
+            </td><td>R: <input id="specularR" value="0.8" type="text">
+            </td><td>G: <input id="specularG" value="0.8" type="text">
+            </td><td>B: <input id="specularB" value="0.8" type="text">
+        </td></tr>
+        <tr>
+            <td><b>Diffuse colour:</b>
+            </td><td>R: <input id="diffuseR" value="0.8" type="text">
+            </td><td>G: <input id="diffuseG" value="0.8" type="text">
+            </td><td>B: <input id="diffuseB" value="0.8" type="text">
+        </td></tr>
+    </tbody></table>
+    <h2>Ambient light:</h2>
+    <table style="border: 0; padding: 10px;">
+        <tbody><tr>
+            <td><b>Colour:</b>
+            </td><td>R: <input id="ambientR" value="0.4" type="text">
+            </td><td>G: <input id="ambientG" value="0.4" type="text">
+            </td><td>B: <input id="ambientB" value="0.4" type="text">
+        </td></tr>
+    </tbody></table>
+    <br>
+</body></html>
