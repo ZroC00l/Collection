@@ -1,0 +1,53 @@
+a)
+i.
+CREATE(thandi:Person {name:"@Thandi",from:"Durban",age:20}),
+(johan:Person{name:"@Johan",from:"Pretoria", age:19}),
+(neo:Person {name:"@Neo", from:"Tshwane",age:22}),
+(melanie:Person {name:"@Melanie", from:"Joburg",age:21}),
+(thandi)-[:FOLLOWS {since:2014}]->(johan),
+(thandi)-[:FOLLOWS {since:2011}]->(neo), 
+(johan)-[:FOLLOWS {since: 2012}]->(thandi),
+(neo)-[:FOLLOWS {since: 2016}]->(thandi),
+(neo)-[:FOLLOWS {since: 2016}]->(melanie),
+(melanie)-[:FOLLOWS {since:2012}]->(johan),
+(melanie)-[:FOLLOWS {since: 2012}]->(thandi)
+ii.
+match (n) return (n)
+iii.
+Match (thandi),(johan),(neo),(melanie)
+Where thandi.name="@Thandi" AND johan.name="@Johan" AND neo.name="@Neo" AND melanie.name="@Melanie"
+create (tone: Tweet { hastag:"#Trees",message:"provide oxygen" }),
+(ttwo:Tweet { hastag:"#Rhinos", message:"are innocent"}),
+(thandi)-[:TWEETED {date:"20-08-2018"}]->(tone),
+(johan)-[:RETWEETED {date: "20-08-2018"}]->(tone),
+(neo)-[:TWEETED {date: "05-09-2018"}]->(ttwo),
+(melanie)-[:FAVOURITED {date: "05-09-2018"}]->(ttwo)
+iv.
+match (n) return (n)
+
+b)
+i.
+Start n=node(*)
+Return distinct labels(n)
+ii.
+match (n:Person)
+return (n.name) order by n.name
+iii.
+match (t:Tweet)return
+(t.hastag) order by (t.hastag)
+iv.
+start r=rel(*)
+return distinct type(r)
+v.
+match (p:Person)-[:TWEETED]->(t:Tweet)
+return p.name , t.message
+vi.
+match (p:Person)-[:RETWEETED]-(t:Tweet)
+return t.hastag,t.message
+vii.
+match (p:Person)-[:FAVOURITED]-(t:Tweet)
+return t.hastag,t.message
+
+
+
+

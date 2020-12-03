@@ -1,0 +1,32 @@
+a)
+i.
+match (neo:Person)-[*1..2]-(t:Tweet)
+where neo.name="@Neo"
+return distinct t
+ii.
+match path=(m:Person)-[*]->(n:Person)
+where m.name="@Melanie" AND n.name="@Neo"
+return nodes(path)
+iii.
+match (p:Person)-[:TWEETED]-(t:Tweet)
+return p.name, t.message, exists(()-[:RETWEETED]-(t)) AS isRetweeted
+iv.
+match path = shortestpath((melanie:Person )-[*]->(neo:Person))
+where melanie.name="@Melanie" AND neo.name="@Neo"
+return  path
+
+b)
+i.
+match(n) return count(n)
+ii.
+match (p:Person) 
+match r =((p)-[:FOLLOWS]->())
+return p.name, count(r) AS NumberFollowing
+iii.
+match (p:Person)
+optional match r =(()-[:FOLLOWS{ since: 2014 }]->(p))
+return p.name, count(r) AS followingsince2014
+iv.
+match r =(()-[:FOLLOWS]->(p:Person)) 
+return p.name, count(r) as Followers 
+order by Followers DESC LIMIT 1
