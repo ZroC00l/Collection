@@ -1,0 +1,58 @@
+(: Question 1 :)
+doc("Musicians.xml")/musicians/musician/name 
+
+(: Question 2 :)
+doc("Musicians.xml")/musicians/musician[name="If These Trees Could Talk"]/albums 
+
+(: Question 3 :)
+doc("Musicians.xml")/musicians/musician/albums[album="Lateralus"] /name
+
+(: Question 4 :)
+doc("Musicians.xml")/musicians/musician[contains(genre,'Pop')]/name 
+
+(: Question 5 :)
+ doc("Musicians.xml")/musicians/musician[@type="solo"]/name 
+
+(: Question 6 :)
+(doc("Musicians.xml")/musicians/musician[@type="solo"][1]/*[self::name|self::genre]) 
+
+(: Question 6 in FLOWR :)
+for $x in subsequence(doc("Musicians.xml")/musicians/musician,2,1)
+return $x/name | $x/genre 
+
+(: Question 7 :)
+doc("Musicians.xml")/musicians/musician[contains(name,"Ben Folds")]/albums/album[4] 
+
+(: Question 8 :)
+doc("Musicians.xml")/musicians/musician/albums/album[@year>=2008] 
+
+(: Question 9 :)
+let $musicians :=doc("Musicians.xml")
+for $x in $musicians/musicians/musician/name
+let $num := count($musicians/musicians/musician[name=$x]/albums/album)
+let $y := 
+(
+	(
+		max($musicians/musicians/musician[name=$x]/albums/album/@year) - 
+		min($musicians/musicians/musician[name=$x]/albums/album/@year) + 1
+	)
+div $num
+)
+order by number($y) descending
+return concat($x, ": ", round-half-to-even($y,2), '&#xa;') 
+
+(: Counts number of albums each solo artist released :)
+(: Question 10 :)
+let $musicians := doc("Musicians.xml")
+for $x in $musicians/musicians/musician[@type="solo"]
+let $number := count($x/albums/album)
+order by $number descending
+return <solo> 
+<name> 
+	{$x/name/text()} 
+	</name> 
+	<numberOfAlbums> 
+	{$number} 
+	</numberOfAlbums> 
+</solo>
+
